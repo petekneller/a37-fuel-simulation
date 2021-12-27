@@ -1,0 +1,34 @@
+/*
+  Credit for styling the parts of the range slider
+  https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
+*/
+
+input[type=range] {
+  height: 150px;
+  width: 150px;
+  margin: 0;
+  transform-origin: 75px 75px;
+  transform: rotate(-90deg);
+
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+
+  height: 30px;
+  width: 76px;
+  /* border: 1px solid #000000; */
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  /* margin-top: -104px; */
+  /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
+  background-image: url('throttle.svg');
+  transform: rotate(90deg)
+}

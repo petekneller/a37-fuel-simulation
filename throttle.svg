@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="19.931437mm"
+   height="7.6792135mm"
+   viewBox="0 0 75.331415 29.0238"
+   version="1.1"
+   id="svg26"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="throttle.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:html="http://www.w3.org/1999/xhtml">
+  <html:link
+     type="text/css"
+     rel="stylesheet"
+     href="diagram.css" />
+  <script
+     id="script1024"
+     type="application/javascript"
+     href="diagram.js" />
+  <sodipodi:namedview
+     id="namedview28"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="4.1664622"
+     inkscape:cx="-11.520565"
+     inkscape:cy="32.40159"
+     inkscape:window-width="1916"
+     inkscape:window-height="1041"
+     inkscape:window-x="0"
+     inkscape:window-y="18"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-midpoints="true"
+     units="mm"
+     inkscape:snap-center="false"
+     inkscape:snap-global="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:object-nodes="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs23">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient12850">
+      <stop
+         style="stop-color:#e8e8e8;stop-opacity:1"
+         offset="0"
+         id="stop14089" />
+      <stop
+         style="stop-color:#434242;stop-opacity:1"
+         offset="1"
+         id="stop14091" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient12850"
+       id="linearGradient12852"
+       x1="565.35425"
+       y1="570.10828"
+       x2="565.35425"
+       y2="583.4715"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-5.3847516)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient12850"
+       id="linearGradient32370"
+       gradientUnits="userSpaceOnUse"
+       x1="565.35425"
+       y1="570.10828"
+       x2="565.35425"
+       y2="583.4715"
+       gradientTransform="matrix(0.59653177,0,0,0.79494265,186.80188,116.81571)" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="throttle"
+       transform="translate(-507.94815,-554.64154)">
+      <path
+         style="fill:url(#linearGradient32370);fill-opacity:1;stroke:none;stroke-width:0.688628px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
+         d="m 511.34968,578.08755 c -3.1697,-5.47959 -4.04305,-11.22639 0.0138,-17.52433 0.16924,-0.26273 0.25625,-0.66191 0.63192,-0.69473 l 24.53095,-2.14325 c 0.15175,-0.0252 0.45,0.31893 0.43045,0.48802 l 0.0465,22.15901 c -0.048,0.18915 -0.2618,0.42329 -0.37932,0.42389 l -24.55114,-1.91621 c -0.36945,-0.17374 -0.60157,-0.44416 -0.72315,-0.7924 z"
+         id="path10069-9"
+         sodipodi:nodetypes="cssccccccc" />
+      <path
+         style="fill:url(#linearGradient12852);fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
+         d="m 538.67309,580.25804 0.0231,-22.04478 c 0.15302,-0.37599 0.48456,-0.67644 1.05932,-0.87393 l 41.12262,-2.69611 c 0.25437,-0.0318 0.75435,0.40119 0.72157,0.61391 2.05275,10.03344 2.391,18.58693 0.078,27.87498 -0.0805,0.23793 -0.43887,0.53247 -0.63589,0.53323 l -41.15645,-2.41051 c -0.61933,-0.21855 -1.00844,-0.55873 -1.21227,-0.99679 z"
+         id="path10069"
+         sodipodi:nodetypes="ccccccccc" />
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1.53734"
+         id="throttleHandle"
+         width="75.331406"
+         height="29.0238"
+         x="507.94815"
+         y="554.64154" />
+    </g>
+  </g>
+</svg>
