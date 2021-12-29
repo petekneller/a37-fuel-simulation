@@ -1,6 +1,7 @@
 window.app = function() {
 
   const SIM_SCALING_FACTOR = 4; // the frequency of sim loops
+  const FUEL_LINE_COLOUR = '#36d4dc';
 
   /* Runtime */
 
@@ -13,14 +14,26 @@ window.app = function() {
 
   const engineCanRun = () => true;
 
+  const engineIsRunning = () => state.powerSetting > 0;
+
   const updateSimulation = () => {
     state.powerSetting = engineCanRun() ? throttlePosition() : 0;
   };
 
-  const updateUI = () => {
+  const renderPump = (pumpName, isOn) => {
+    document.
+      querySelector(`g[name="${pumpName}"] g[name="impeller"] animateTransform`).
+      setAttribute('to', isOn ? '60' : '0');
+
+    document.
+      querySelector(`g[name="${pumpName}"] rect[name="background"]`).
+      style.setProperty('fill', isOn ? FUEL_LINE_COLOUR : 'white');
+  };
+
+  const renderEngines = () => {
     // To show or not the heat gradient in the engine
     document.querySelectorAll('linearGradient[name="engine"] stop').forEach(stop =>
-      stop.style.setProperty('stop-opacity', state.powerSetting > 0 ? '1' : '0')
+      stop.style.setProperty('stop-opacity', engineIsRunning() ? '1' : '0')
     );
 
     // The level of heat in the engine
@@ -29,17 +42,32 @@ window.app = function() {
     // Luminosity runs from 42 (cold end) to 50
     const lightness = Math.round(42 + (8 * state.powerSetting / 100));
     const color = `hsl(${hue}, 90%, ${lightness}%)`;
-    document.querySelector('linearGradient[name="engine"] stop[name="hot"]').style.setProperty('stop-color', color);
+    document.
+      querySelector('linearGradient[name="engine"] stop[name="hot"]').
+      style.setProperty('stop-color', color);
 
     // Rotating compressor
-    document.querySelector('pattern[name="compressor"] animate').setAttribute('to',
-      state.powerSetting > 0 ? '4' : '0');
+    document.
+      querySelector('pattern[name="compressor"] animate').
+      setAttribute('to', engineIsRunning() ? '4' : '0');
 
+    // Fuel pumps
+    renderPump('pumpEngineLeft', engineIsRunning());
+    renderPump('pumpEngineRight', engineIsRunning());
+
+    // Fuel lines
+    document.
+      querySelector('path[name="fuelLineFuselageToEngine"]').
+      style.setProperty('fill', engineIsRunning() ? FUEL_LINE_COLOUR : 'white');
+  };
+
+  const renderUI = () => {
+    renderEngines();
   };
 
   const runSimulation = () => {
     updateSimulation();
-    updateUI();
+    renderUI();
   };
 
   /* end runtime */
