@@ -39,7 +39,7 @@ window.app = function() {
     // The level of heat in the engine
     // Hue runs from 1 (cold end) to 56
     const hue = Math.round(1 + (55 * state.powerSetting / 100));
-    // Luminosity runs from 42 (cold end) to 50
+    // Lightness runs from 42 (cold end) to 50
     const lightness = Math.round(42 + (8 * state.powerSetting / 100));
     const color = `hsl(${hue}, 90%, ${lightness}%)`;
     document.
@@ -59,6 +59,15 @@ window.app = function() {
     document.
       querySelector('path[name="fuelLineFuselageToEngine"]').
       style.setProperty('fill', engineIsRunning() ? FUEL_LINE_COLOUR : 'white');
+
+    // Fuel flow gauge
+    document.
+      querySelectorAll('g[name="gaugeFuelFlow"] path[name="indicator"]').
+      forEach(indicator => {
+        indicator.style.setProperty('transform-box', 'fill-box');
+        indicator.style.setProperty('transform-origin', 'center');
+        indicator.style.setProperty('transform', `rotate(${210 * state.powerSetting / 100}deg)`);
+      });
   };
 
   const renderUI = () => {
