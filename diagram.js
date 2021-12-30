@@ -1,6 +1,7 @@
 window.app = function() {
 
   const SIM_SCALING_FACTOR = 4; // the frequency of sim loops
+  const MAX_SINGLE_ENGINE_FUEL_FLOW = 3200; // lbs / hr
   const FUEL_LINE_COLOUR = '#36d4dc';
 
   /* Runtime */
@@ -61,12 +62,14 @@ window.app = function() {
       style.setProperty('fill', engineIsRunning() ? FUEL_LINE_COLOUR : 'white');
 
     // Fuel flow gauge
+    const singleEngineFuelFlow = MAX_SINGLE_ENGINE_FUEL_FLOW * state.powerSetting / 100;
+    const indicatorAngularRate = 65; // degrees of angle of the indicator per 1000 lbs/hr fuel flow
     document.
       querySelectorAll('g[name="gaugeFuelFlow"] path[name="indicator"]').
       forEach(indicator => {
         indicator.style.setProperty('transform-box', 'fill-box');
         indicator.style.setProperty('transform-origin', 'center');
-        indicator.style.setProperty('transform', `rotate(${210 * state.powerSetting / 100}deg)`);
+        indicator.style.setProperty('transform', `rotate(${indicatorAngularRate * singleEngineFuelFlow / 1000}deg)`);
       });
   };
 
