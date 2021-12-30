@@ -7,13 +7,14 @@ window.app = function() {
   /* Runtime */
 
   const state = {
-    powerSetting: 0
+    powerSetting: 0,
+    batteryMasterOn: false,
   };
 
   const throttlePosition = () =>
     document.getElementById('throttle').valueAsNumber;
 
-  const engineCanRun = () => true;
+  const engineCanRun = () => state.batteryMasterOn;
 
   const engineIsRunning = () => state.powerSetting > 0;
 
@@ -73,8 +74,15 @@ window.app = function() {
       });
   };
 
+  const renderBatteryMasterSwitch = () => {
+    document.querySelector('g[name="switchBatteryOn"]').style.setProperty('display', state.batteryMasterOn ? 'inline' : 'none');
+    document.querySelector('g[name="switchBatteryOff"]').style.setProperty('display', state.batteryMasterOn ? 'none' : 'inline' );
+  };
+
   const renderUI = () => {
     renderEngines();
+    renderBatteryMasterSwitch();
+    renderPump('pumpFuselage', state.batteryMasterOn);
   };
 
   const runSimulation = () => {
@@ -95,6 +103,8 @@ window.app = function() {
 
   const addEventHandlers = () => {
     document.getElementById('throttle').oninput = throttleChangedHandler;
+    document.querySelector('g[name="switchBatteryOn"]').onclick = () => { state.batteryMasterOn = false; };
+    document.querySelector('g[name="switchBatteryOff"]').onclick = () => { state.batteryMasterOn = true; };
   };
 
   const initSimulation = () => {

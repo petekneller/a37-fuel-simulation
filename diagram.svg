@@ -33,9 +33,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="0.95686602"
-     inkscape:cx="507.38556"
-     inkscape:cy="515.22365"
+     inkscape:zoom="4.1235239"
+     inkscape:cx="225.17148"
+     inkscape:cy="705.70707"
      inkscape:window-width="1916"
      inkscape:window-height="1041"
      inkscape:window-x="0"
@@ -46,10 +46,10 @@
      units="mm"
      inkscape:snap-center="false"
      inkscape:snap-global="true"
-     inkscape:snap-bbox="false"
-     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="false"
      inkscape:object-nodes="false"
-     inkscape:bbox-paths="true"
+     inkscape:bbox-paths="false"
      inkscape:snap-object-midpoints="true"
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:snap-nodes="false" />
@@ -769,6 +769,12 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline">
+    <circle
+       style="fill:#adadad;fill-opacity:1;stroke:black;stroke-width:0.285659;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path52555"
+       cx="301.46878"
+       cy="716.95868"
+       r="22.556355" />
     <rect
        style="fill:none;fill-rule:evenodd;stroke:black;stroke-width:0.422;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect1139"
@@ -813,13 +819,6 @@
        height="74.903656"
        x="510.16776"
        y="263.56418" />
-    <rect
-       style="fill:blue;fill-opacity:1;fill-rule:evenodd;stroke-width:0.746278"
-       id="rect15838-0-6-3-2-6"
-       width="74.808571"
-       height="74.903656"
-       x="805.09363"
-       y="690.80981" />
     <rect
        style="fill:blue;fill-opacity:1;fill-rule:evenodd;stroke-width:1.58862"
        id="rect15838-0-6-3-2-6-9"
@@ -987,7 +986,7 @@
        height="100%" />
     <path
        id="rect51633"
-       style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.795818;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.796;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 557.70508 454.875 C 556.90437 454.875 556.25977 455.51961 556.25977 456.32031 L 556.25977 507.40625 L 472.50977 657.54688 C 471.28691 659.73906 472.06758 662.48809 474.25977 663.71094 L 474.68555 663.94922 C 476.87773 665.17207 479.62676 664.3914 480.84961 662.19922 L 560.79883 518.87695 L 640.5332 661.81641 C 641.75606 664.00859 644.50508 664.78731 646.69727 663.56445 L 647.12305 663.32617 C 649.31523 662.10332 650.0959 659.35429 648.87305 657.16211 L 566.25977 509.0625 L 566.25977 456.32031 C 566.25977 455.51961 565.61516 454.875 564.81445 454.875 L 557.70508 454.875 z "
        name="fuelLineFuselageToEngine" />
     <g
@@ -1895,6 +1894,99 @@
            sodipodi:nodetypes="cccccccc"
            name="indicator" />
       </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px"
+       x="265.70706"
+       y="658.70935"
+       id="text45781"><tspan
+         sodipodi:role="line"
+         id="tspan45779"
+         x="265.70706"
+         y="658.70935">BATTERY</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline"
+       x="289.52347"
+       y="686.53436"
+       id="text45781-0"><tspan
+         sodipodi:role="line"
+         id="tspan48200"
+         x="289.52347"
+         y="686.53436">ON</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline"
+       x="285.98441"
+       y="757.95563"
+       id="text45781-0-4"><tspan
+         sodipodi:role="line"
+         id="tspan48247"
+         x="285.98441"
+         y="757.95563">OFF</tspan></text>
+    <circle
+       style="fill:white;fill-opacity:1;stroke:black;stroke-width:0.217915;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path52739"
+       cx="301.46878"
+       cy="716.95868"
+       r="14.29614" />
+    <g
+       id="g76354"
+       transform="translate(80.12756,24.494631)"
+       name="switchBatteryOff">
+      <path
+         id="rect49653"
+         style="fill:#797979;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.377535"
+         d="m 220.91992,682.41602 c -5.50834,0 -9.97265,2.33808 -9.97265,5.22265 0.004,0.0638 0.0124,0.12664 0.0195,0.18945 h -0.0664 l -5.81445,43.49415 h 32.50586 l -6.76758,-43.47852 c 0.0236,-0.0682 0.0492,-0.13538 0.0703,-0.20508 0,-2.88457 -4.46627,-5.22265 -9.97461,-5.22265 z" />
+      <ellipse
+         style="display:inline;fill:#b6b6b6;fill-opacity:1;stroke:#d2d2d2;stroke-width:0.224584;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path53275-4"
+         cx="221.27345"
+         cy="730.85181"
+         rx="15.946881"
+         ry="6.7054296" />
+      <path
+         id="rect60626"
+         style="fill:#b6b6b6;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.25;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 204.95508,732.03711 10.77344,11.99219 h 0.29296 c -0.0173,0.0415 -0.0271,0.0832 -0.0293,0.125 -0.002,0.74622 2.3577,1.35145 5.26953,1.35156 2.91183,-1.1e-4 5.27154,-0.60534 5.26953,-1.35156 3.8e-4,-0.0417 -0.007,-0.0834 -0.0215,-0.125 h 0.30078 l 10.74804,-11.99219"
+         sodipodi:nodetypes="ccccccccc" />
+      <ellipse
+         style="display:inline;fill:#e3e3e3;fill-opacity:1;stroke:none;stroke-width:0.25;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path53275-4-7-3-1"
+         cx="221.25687"
+         cy="744.06195"
+         rx="5.2702904"
+         ry="1.3506273" />
+    </g>
+    <g
+       id="g76354-7"
+       transform="rotate(180,261.37112,702.75558)"
+       name="switchBatteryOn"
+       style="display:inline">
+      <path
+         id="rect49653-5"
+         style="fill:#797979;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.377535"
+         d="m 220.91992,682.41602 c -5.50834,0 -9.97265,2.33808 -9.97265,5.22265 0.004,0.0638 0.0124,0.12664 0.0195,0.18945 h -0.0664 l -5.81445,43.49415 h 32.50586 l -6.76758,-43.47852 c 0.0236,-0.0682 0.0492,-0.13538 0.0703,-0.20508 0,-2.88457 -4.46627,-5.22265 -9.97461,-5.22265 z" />
+      <ellipse
+         style="display:inline;fill:#b6b6b6;fill-opacity:1;stroke:#d2d2d2;stroke-width:0.224584;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path53275-4-9"
+         cx="221.27345"
+         cy="730.85181"
+         rx="15.946881"
+         ry="6.7054296" />
+      <path
+         id="rect60626-6"
+         style="fill:#b6b6b6;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.25;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 204.95508,732.03711 10.77344,11.99219 h 0.29296 c -0.0173,0.0415 -0.0271,0.0832 -0.0293,0.125 -0.002,0.74622 2.3577,1.35145 5.26953,1.35156 2.91183,-1.1e-4 5.27154,-0.60534 5.26953,-1.35156 3.8e-4,-0.0417 -0.007,-0.0834 -0.0215,-0.125 h 0.30078 l 10.74804,-11.99219"
+         sodipodi:nodetypes="ccccccccc" />
+      <ellipse
+         style="display:inline;fill:#e3e3e3;fill-opacity:1;stroke:none;stroke-width:0.25;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path53275-4-7-3-1-2"
+         cx="221.25687"
+         cy="744.06195"
+         rx="5.2702904"
+         ry="1.3506273" />
     </g>
   </g>
 </svg>
