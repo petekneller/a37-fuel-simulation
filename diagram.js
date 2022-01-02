@@ -1,6 +1,7 @@
 window.app = function() {
 
-  const SIM_SCALING_FACTOR = 4; // the frequency of sim loops
+  const SIM_CALCULATION_FREQUENCY = 4; // the frequency of sim loops
+  const DEFAULT_SIM_SPEED_FACTOR = 1; // rate of simulation relative to real time
   const MAX_SINGLE_ENGINE_FUEL_FLOW = 3200; // lbs / hr
   const FUEL_LINE_COLOUR = '#36d4dc';
   const MAX_FUSELAGE_FUEL = 514;
@@ -8,6 +9,7 @@ window.app = function() {
   /* Runtime */
 
   const state = {
+    simSpeedFactor: DEFAULT_SIM_SPEED_FACTOR,
     powerSetting: 0,
     batteryMasterOn: false,
     fuelFuselage: MAX_FUSELAGE_FUEL,
@@ -21,8 +23,9 @@ window.app = function() {
   const engineIsRunning = () => state.powerSetting > 0;
 
   const updateFuelLevels = () => {
+    // fuselage tank
     const totalEngineFuelFlow = 2 * MAX_SINGLE_ENGINE_FUEL_FLOW * state.powerSetting / 100;
-    const fuelConsumedLastPeriod = totalEngineFuelFlow / (3600 * SIM_SCALING_FACTOR);
+    const fuelConsumedLastPeriod = (totalEngineFuelFlow * state.simSpeedFactor) / (3600 * SIM_CALCULATION_FREQUENCY);
     state.fuelFuselage = Math.max(state.fuelFuselage - fuelConsumedLastPeriod, 0);
   };
 
@@ -108,10 +111,15 @@ window.app = function() {
     barStyle.setProperty('transform-origin', 'bottom');
   };
 
+  const renderSimulationControls = () => {
+    document.querySelector('text[name="simSpeed"]').textContent = `x ${state.simSpeedFactor}`;
+  };
+
   const renderUI = () => {
-    renderEngines();
     renderBatteryMasterSwitch();
+    renderEngines();
     renderFuselageTank();
+    renderSimulationControls();
   };
 
   const runSimulation = () => {
@@ -160,6 +168,9 @@ window.app = function() {
     document.querySelector('g[name="switchBatteryOff"]').onclick = () => { state.batteryMasterOn = true; };
     document.querySelector('g[name="indicatorFuelFuselage"] text').onclick = prepareFuselageFuelChange;
     document.querySelector('g[name="indicatorFuelFuselage"] input[type="text"]').onblur = handleFuselageFuelChange;
+    document.querySelector('g[name="buttonSimSpeedNormal"]').onclick = () => { state.simSpeedFactor = 1; };
+    document.querySelector('g[name="buttonSimSpeedFaster"]').onclick = () => { state.simSpeedFactor = Math.min(state.simSpeedFactor * 2, 32); };
+    document.querySelector('g[name="buttonSimSpeedSlower"]').onclick = () => { state.simSpeedFactor = Math.max(state.simSpeedFactor / 2, 1); };
   };
 
   const initSimulation = () => {
@@ -173,7 +184,7 @@ window.app = function() {
     addEventHandlers();
     initSimulation();
     initUI();
-    window.setInterval(runSimulation, 1000 / SIM_SCALING_FACTOR);
+    window.setInterval(runSimulation, 1000 / SIM_CALCULATION_FREQUENCY);
   };
 
   /* end initialisation */
