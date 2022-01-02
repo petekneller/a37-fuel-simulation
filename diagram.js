@@ -115,11 +115,21 @@ window.app = function() {
     document.querySelector('text[name="simSpeed"]').textContent = `x ${state.simSpeedFactor}`;
   };
 
+  const renderAnnunciatorLamp = (lampName, isOn) => {
+    document.querySelector(`g[name="annunciatorPanel"] g[name="${lampName}"] rect[name="mask"]`).style.setProperty('fill-opacity', state.batteryMasterOn && isOn ? '0' : '0.75');
+  };
+
+  const renderAnnunciatorPanel = () => {
+    renderAnnunciatorLamp('boostOff', state.fuelFuselage < 1);
+    renderAnnunciatorLamp('fuelLow', state.fuelFuselage < 295);
+  };
+
   const renderUI = () => {
     renderBatteryMasterSwitch();
     renderEngines();
     renderFuselageTank();
     renderSimulationControls();
+    renderAnnunciatorPanel();
   };
 
   const runSimulation = () => {
