@@ -32,7 +32,7 @@ window.app = function() {
   const updateSimulation = () => {
     // Calculation of fuel flows/levels is retrospective - the fuel used in the
     // last simulation period will be calculated and deducted in this period to
-    // bring up to date. So this done first, before any decisions or indications
+    // bring up to date. This done first, before any decisions or indications
     // are made based on fuel state.
     updateFuelLevels();
 
@@ -84,13 +84,13 @@ window.app = function() {
 
     // Fuel flow gauge
     const singleEngineFuelFlow = MAX_SINGLE_ENGINE_FUEL_FLOW * state.powerSetting / 100;
-    const indicatorAngularRate = 65; // degrees of angle of the indicator per 1000 lbs/hr fuel flow
+    const INDICATOR_ANGULAR_RATE = 65; // degrees of angle of the indicator per 1000 lbs/hr fuel flow
     document.
       querySelectorAll('g[name="gaugeFuelFlow"] path[name="indicator"]').
       forEach(indicator => {
         indicator.style.setProperty('transform-box', 'fill-box');
         indicator.style.setProperty('transform-origin', 'center');
-        indicator.style.setProperty('transform', `rotate(${ indicatorAngularRate * singleEngineFuelFlow / 1000 }deg)`);
+        indicator.style.setProperty('transform', `rotate(${ INDICATOR_ANGULAR_RATE * singleEngineFuelFlow / 1000 }deg)`);
       });
   };
 
@@ -124,12 +124,22 @@ window.app = function() {
     renderAnnunciatorLamp('fuelLow', state.fuelFuselage < 295);
   };
 
+  const renderFuelPanel = () => {
+    // fuselage/total gauge
+    const GAUGE1_ANGULAR_RATE = 147; // degrees per 1000 lbs of fuel
+    let indicatorStyle = document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel1"] path[name="indicatorFuselage"]').style;
+    indicatorStyle.setProperty('transform', `rotate(${ state.fuelFuselage * GAUGE1_ANGULAR_RATE / 1000 }deg)`);
+    indicatorStyle.setProperty('transform-box', 'fill-box');
+    indicatorStyle.setProperty('transform-origin', 'center');
+  };
+
   const renderUI = () => {
     renderBatteryMasterSwitch();
     renderEngines();
     renderFuselageTank();
     renderSimulationControls();
     renderAnnunciatorPanel();
+    renderFuelPanel();
   };
 
   const runSimulation = () => {

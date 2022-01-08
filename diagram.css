@@ -26,9 +26,13 @@ input[type=range]::-webkit-slider-thumb {
   /* border: 1px solid #000000; */
   border-radius: 3px;
   background: transparent;
-  cursor: pointer;
+  cursor: grab;
   /* margin-top: -104px; */
   /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
   background-image: url('throttle.svg');
   transform: rotate(90deg)
+}
+
+.manipulatible {
+  cursor: grab;
 }
