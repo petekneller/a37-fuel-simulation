@@ -13,6 +13,7 @@ window.app = function() {
     powerSetting: 0,
     batteryMasterOn: false,
     fuelFuselage: MAX_FUSELAGE_FUEL,
+    proportionerPumpsOn: false,
   };
 
   const throttlePosition = () =>
@@ -29,6 +30,9 @@ window.app = function() {
     state.fuelFuselage = Math.max(state.fuelFuselage - fuelConsumedLastPeriod, 0);
   };
 
+  const PROPORTIONER_PUMPS_FUEL_ON = 450;
+  const PROPORTIONER_PUMPS_FUEL_OFF = 500;
+
   const updateSimulation = () => {
     // Calculation of fuel flows/levels is retrospective - the fuel used in the
     // last simulation period will be calculated and deducted in this period to
@@ -37,18 +41,22 @@ window.app = function() {
     updateFuelLevels();
 
     state.powerSetting = engineCanRun() ? throttlePosition() : 0;
+    state.proportionerPumpsOn = engineIsRunning() &&
+      (state.fuelFuselage < PROPORTIONER_PUMPS_FUEL_ON ||
+       (state.fuelFuselage < PROPORTIONER_PUMPS_FUEL_OFF && state.proportionerPumpsOn));
   };
 
   const renderPump = (pumpName, isOn, hasPressure) => {
-    const impeller = document.querySelector(`g[name="${pumpName}"] g[name="impeller"]`);
-    impeller.style.setProperty('transform-box', 'fill-box');
-    impeller.style.setProperty('transform-origin', 'center');
-    impeller.
-      querySelector('animateTransform').
-      setAttribute('to', isOn ? '60' : '0');
+    document.querySelectorAll(`g[name="${pumpName}"] g[name="impeller"]`).forEach(impeller => {
+      impeller.style.setProperty('transform-box', 'fill-box');
+      impeller.style.setProperty('transform-origin', 'center');
+      impeller.
+        querySelector('animateTransform').
+        setAttribute('to', isOn ? '60' : '0');
+    });
 
     document.
-      querySelector(`g[name="${pumpName}"] rect[name="background"]`).
+      querySelector(`g[name="${pumpName}"] [name="background"]`).
       style.setProperty('fill', hasPressure ? FUEL_LINE_COLOUR : 'white');
   };
 
@@ -133,6 +141,10 @@ window.app = function() {
     indicatorStyle.setProperty('transform-origin', 'center');
   };
 
+  const renderProportionerLines = () => {
+    renderPump('pumpProportioners', state.proportionerPumpsOn, false);
+  };
+
   const renderUI = () => {
     renderBatteryMasterSwitch();
     renderEngines();
@@ -140,6 +152,7 @@ window.app = function() {
     renderSimulationControls();
     renderAnnunciatorPanel();
     renderFuelPanel();
+    renderProportionerLines();
   };
 
   const runSimulation = () => {
