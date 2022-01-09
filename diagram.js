@@ -2,15 +2,17 @@ window.app = function() {
 
   const SIM_CALCULATION_FREQUENCY = 4; // the frequency of sim loops
   const DEFAULT_SIM_SPEED_FACTOR = 1; // rate of simulation relative to real time
-  const MAX_SINGLE_ENGINE_FUEL_FLOW = 3200; // lbs / hr
   const MAX_FUSELAGE_FUEL = 514;
   const MAX_WING_FUEL = 645;
   const MAX_SEAT_FUEL = 195;
   const MAX_PYLON_FUEL = 632;
+  const MAX_TIP_FUEL = 585;
   const TANK_SELECTOR_WINGS = Symbol('wings');
   const TANK_SELECTOR_SEAT = Symbol('seat');
   const TANK_SELECTOR_PYLONS = Symbol('pylons');
-  const TRANSFER_PUMPS_FUEL_FLOW = 8000; // lbs / hr
+  const TIP_SELECTOR_OFF = Symbol('off');
+  const TIP_SELECTOR_ON = Symbol('on');
+  const TIP_SELECTOR_DUMP = Symbol('dump');
 
   /* Runtime */
 
@@ -26,8 +28,12 @@ window.app = function() {
     fuelPylonLeftInner: MAX_PYLON_FUEL,
     fuelPylonRightInner: MAX_PYLON_FUEL,
     fuelPylonRightOuter: 0,
+    fuelTipLeft: MAX_TIP_FUEL,
+    fuelTipRight: MAX_TIP_FUEL,
     proportionerPumpsOn: false,
     fuelTankSelector: TANK_SELECTOR_WINGS,
+    tipTankSelectorLeft: TIP_SELECTOR_OFF,
+    tipTankSelectorRight: TIP_SELECTOR_OFF,
   };
 
   const throttlePosition = () =>
@@ -39,10 +45,17 @@ window.app = function() {
 
   const seatTransferPumpIsOn = () => engineIsRunning() && state.fuelTankSelector == TANK_SELECTOR_SEAT;
 
+  const leftTipTransferPumpIsOn = () => engineIsRunning() && state.tipTankSelectorLeft == TIP_SELECTOR_ON;
+  const rightTipTransferPumpIsOn = () => engineIsRunning() && state.tipTankSelectorRight == TIP_SELECTOR_ON;
+
+  const MAX_SINGLE_ENGINE_FUEL_FLOW = 3200; // lbs / hr
+  const TRANSFER_PUMPS_FUEL_FLOW = 8000; // lbs / hr
+
   const updateFuelLevels = () => {
     // fuselage tank
     const totalEngineFuelFlow = 2 * MAX_SINGLE_ENGINE_FUEL_FLOW * state.powerSetting / 100;
     const fuselageFuelConsumedLastPeriod = (totalEngineFuelFlow * state.simSpeedFactor) / (3600 * SIM_CALCULATION_FREQUENCY);
+    const transferFlowPerPeriod = (TRANSFER_PUMPS_FUEL_FLOW * state.simSpeedFactor) / (3600 * SIM_CALCULATION_FREQUENCY);
 
     const fuelAvailableInFuselageSource =
       state.fuelTankSelector == TANK_SELECTOR_WINGS ?
@@ -51,7 +64,7 @@ window.app = function() {
           state.fuelSeat :
           (state.fuelPylonLeftOuter + state.fuelPylonLeftInner + state.fuelPylonRightInner + state.fuelPylonRightOuter);
     const nominalFuelTransferredToFuselage = (state.proportionerPumpsOn || seatTransferPumpIsOn()) ?
-          (state.simSpeedFactor * TRANSFER_PUMPS_FUEL_FLOW) / (3600 * SIM_CALCULATION_FREQUENCY) :
+          transferFlowPerPeriod :
           0;
     let fuelTransferredToFuselage = Math.min(fuelAvailableInFuselageSource, nominalFuelTransferredToFuselage);
     const netFuselageFlow = fuelTransferredToFuselage - fuselageFuelConsumedLastPeriod;
@@ -63,15 +76,47 @@ window.app = function() {
     }
 
     // wing tanks
+    let leftWingInflow = leftTipTransferPumpIsOn() ?
+            Math.min(state.fuelTipLeft, transferFlowPerPeriod) :
+            0;
+    let leftWingOutflow = 0;
+
+    let rightWingInflow = rightTipTransferPumpIsOn() ?
+            Math.min(state.fuelTipRight, transferFlowPerPeriod) :
+            0;
+    let rightWingOutflow = 0;
+
     if (state.proportionerPumpsOn && state.fuelTankSelector == TANK_SELECTOR_WINGS) {
       // the proportioner pumps draw equally from each side, but presumably will draw the whole amount from one side if the other is empty...
       // or runs empty during the calculation period. So the calc cannot just split flow 50/50
       const leftWingNominalOutflow = Math.min(state.fuelWingLeft, fuelTransferredToFuselage / 2);
       const rightWingNominalOutflow = Math.min(state.fuelWingRight, fuelTransferredToFuselage / 2);
-      const leftWingOutflow = fuelTransferredToFuselage - rightWingNominalOutflow;
-      state.fuelWingLeft = Math.max(state.fuelWingLeft - leftWingOutflow, 0)
-      const rightWingOutflow = fuelTransferredToFuselage - leftWingNominalOutflow;
-      state.fuelWingRight = Math.max(state.fuelWingRight - rightWingOutflow, 0)
+      leftWingOutflow = fuelTransferredToFuselage - rightWingNominalOutflow;
+      rightWingOutflow = fuelTransferredToFuselage - leftWingNominalOutflow;
+    }
+
+    const leftWingNetFlow = leftWingInflow - leftWingOutflow;
+    state.fuelWingLeft = Math.max(state.fuelWingLeft + leftWingNetFlow, 0)
+    if (state.fuelWingLeft > MAX_WING_FUEL) {
+      const overflow = state.fuelWingLeft - MAX_WING_FUEL;
+      state.fuelWingLeft = MAX_WING_FUEL;
+      leftWingInflow = leftWingInflow - overflow;
+    }
+
+    const rightWingNetFlow = rightWingInflow - rightWingOutflow;
+    state.fuelWingRight = Math.max(state.fuelWingRight + rightWingNetFlow, 0)
+    if (state.fuelWingRight > MAX_WING_FUEL) {
+      const overflow = state.fuelWingRight - MAX_WING_FUEL;
+      state.fuelWingRight = MAX_WING_FUEL;
+      rightWingInflow = rightWingInflow - overflow;
+    }
+
+    // tip tanks
+    if (leftTipTransferPumpIsOn()) {
+      state.fuelTipLeft = state.fuelTipLeft - leftWingInflow;
+    }
+    if (rightTipTransferPumpIsOn()) {
+      state.fuelTipRight = state.fuelTipRight - rightWingInflow;
     }
 
     // seat tank
@@ -108,7 +153,6 @@ window.app = function() {
       const rightOuterOutflow = rightPylonsOutflow - rightInnerNominalOutflow;
       state.fuelPylonRightOuter = Math.max(state.fuelPylonRightOuter - rightOuterOutflow, 0);
     }
-
   };
 
   const TRANSFER_PUMPS_FUEL_ON = 450;
@@ -222,6 +266,8 @@ window.app = function() {
     renderAnnunciatorLamp('fuelLow', state.fuelFuselage < 295);
     renderAnnunciatorLamp('seatTankEmpty', seatTransferPumpIsOn() && state.fuelFuselage < 375);
     renderAnnunciatorLamp('pylonTanksEmpty', state.proportionerPumpsOn && (state.fuelTankSelector == TANK_SELECTOR_PYLONS) && state.fuelFuselage < 375);
+    renderAnnunciatorLamp('tipTankEmptyLeft', leftTipTransferPumpIsOn() && state.fuelTipLeft <= 0);
+    renderAnnunciatorLamp('tipTankEmptyRight', rightTipTransferPumpIsOn() && state.fuelTipRight <= 0);
   };
 
   const SWITCH_3_POS_UP = Symbol('up');
@@ -266,6 +312,20 @@ window.app = function() {
       'g[name="fuelPanel"] g[name="switchFuelSelector"]',
       state.fuelTankSelector == TANK_SELECTOR_SEAT ? SWITCH_3_POS_UP :
         state.fuelTankSelector == TANK_SELECTOR_WINGS ? SWITCH_3_POS_MIDDLE :
+        SWITCH_3_POS_DOWN
+    );
+
+    render3PositionSwitch(
+      'g[name="fuelPanel"] g[name="switchTipTankLeft"]',
+      state.tipTankSelectorLeft == TIP_SELECTOR_ON ? SWITCH_3_POS_UP :
+        state.tipTankSelectorLeft == TIP_SELECTOR_OFF ? SWITCH_3_POS_MIDDLE :
+        SWITCH_3_POS_DOWN
+    );
+
+    render3PositionSwitch(
+      'g[name="fuelPanel"] g[name="switchTipTankRight"]',
+      state.tipTankSelectorRight == TIP_SELECTOR_ON ? SWITCH_3_POS_UP :
+        state.tipTankSelectorRight == TIP_SELECTOR_OFF ? SWITCH_3_POS_MIDDLE :
         SWITCH_3_POS_DOWN
     );
   };
@@ -313,6 +373,22 @@ window.app = function() {
     renderFuelTankIndicator('indicatorFuelPylonRightOuter', state.fuelPylonRightOuter, MAX_PYLON_FUEL);
   };
 
+  const renderTipTanks = () => {
+    // left
+    renderFuelTankIndicator('indicatorFuelTipLeft', state.fuelTipLeft, MAX_TIP_FUEL);
+    const leftPumpHasPressure = leftTipTransferPumpIsOn() && (state.fuelTipLeft > 0);
+    renderPump('pumpTipLeft', leftTipTransferPumpIsOn(), leftPumpHasPressure);
+    renderFuelLine('rect[name="fuelLineTipToWingLeft"]', leftPumpHasPressure);
+    renderVentLine('rect[name="fuelLineTipToWingVentLeft"]', leftPumpHasPressure && (state.fuelWingLeft >= MAX_WING_FUEL));
+
+    // right
+    renderFuelTankIndicator('indicatorFuelTipRight', state.fuelTipRight, MAX_TIP_FUEL);
+    const rightPumpHasPressure = rightTipTransferPumpIsOn() && (state.fuelTipRight > 0);
+    renderPump('pumpTipRight', rightTipTransferPumpIsOn(), rightPumpHasPressure);
+    renderFuelLine('rect[name="fuelLineTipToWingRight"]', rightPumpHasPressure);
+    renderVentLine('rect[name="fuelLineTipToWingVentRight"]', rightPumpHasPressure && (state.fuelWingRight >= MAX_WING_FUEL));
+  };
+
   const renderUI = () => {
     renderBatteryMasterSwitch();
     renderEngines();
@@ -324,6 +400,7 @@ window.app = function() {
     renderWingTanks();
     renderSeatTank();
     renderPylonTanks();
+    renderTipTanks();
   };
 
   const runSimulation = () => {
@@ -401,6 +478,22 @@ window.app = function() {
     addFuelIndicatorEventHandlers('indicatorFuelPylonLeftInner', () => state.fuelPylonLeftInner, (fuel) => { state.fuelPylonLeftInner = fuel; }, MAX_PYLON_FUEL);
     addFuelIndicatorEventHandlers('indicatorFuelPylonRightInner', () => state.fuelPylonRightInner, (fuel) => { state.fuelPylonRightInner = fuel; }, MAX_PYLON_FUEL);
     addFuelIndicatorEventHandlers('indicatorFuelPylonRightOuter', () => state.fuelPylonRightOuter, (fuel) => { state.fuelPylonRightOuter = fuel; }, MAX_PYLON_FUEL);
+    addFuelIndicatorEventHandlers('indicatorFuelTipLeft', () => state.fuelTipLeft, (fuel) => { state.fuelTipLeft = fuel; }, MAX_TIP_FUEL);
+    addFuelIndicatorEventHandlers('indicatorFuelTipRight', () => state.fuelTipRight, (fuel) => { state.fuelTipRight = fuel; }, MAX_TIP_FUEL);
+    add3PositionSwitchEventHandlers('g[name="fuelPanel"] g[name="switchTipTankLeft"]', (newPos) => {
+      switch (newPos) {
+      case SWITCH_3_POS_UP: state.tipTankSelectorLeft = TIP_SELECTOR_ON; break;
+      case SWITCH_3_POS_MIDDLE: state.tipTankSelectorLeft = TIP_SELECTOR_OFF; break;
+      case SWITCH_3_POS_DOWN: state.tipTankSelectorLeft = TIP_SELECTOR_DUMP; break;
+      };
+    });
+    add3PositionSwitchEventHandlers('g[name="fuelPanel"] g[name="switchTipTankRight"]', (newPos) => {
+      switch (newPos) {
+      case SWITCH_3_POS_UP: state.tipTankSelectorRight = TIP_SELECTOR_ON; break;
+      case SWITCH_3_POS_MIDDLE: state.tipTankSelectorRight = TIP_SELECTOR_OFF; break;
+      case SWITCH_3_POS_DOWN: state.tipTankSelectorRight = TIP_SELECTOR_DUMP; break;
+      };
+    });
   };
 
   const initSimulation = () => {

@@ -33,26 +33,26 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="1.280157"
-     inkscape:cx="508.92194"
-     inkscape:cy="237.47087"
+     inkscape:zoom="3.6208309"
+     inkscape:cx="838.34349"
+     inkscape:cy="535.78862"
      inkscape:window-width="2556"
      inkscape:window-height="1401"
      inkscape:window-x="3200"
      inkscape:window-y="18"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g115870-0"
      inkscape:snap-midpoints="true"
      units="mm"
-     inkscape:snap-center="true"
+     inkscape:snap-center="false"
      inkscape:snap-global="true"
-     inkscape:snap-bbox="true"
+     inkscape:snap-bbox="false"
      inkscape:bbox-nodes="false"
      inkscape:object-nodes="true"
      inkscape:bbox-paths="false"
      inkscape:snap-object-midpoints="true"
      inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:snap-nodes="true"
+     inkscape:snap-nodes="false"
      inkscape:snap-bbox-midpoints="true"
      showguides="true"
      inkscape:snap-intersection-paths="true"
@@ -1008,20 +1008,6 @@
        style="fill:#d0c8c8;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:20.6;stroke-dasharray:none;stroke-opacity:1"
        d="m 619.95372,466.69463 -117.21942,-0.0778 c -1.62307,-0.54596 -1.97088,-2.10635 -2.12319,-3.82225 l 9.00236,-97.55461 c 0.17123,-2.04155 1.5713,-2.70434 3.05153,-3.00385 v 4e-5 l 97.10373,-0.0384 c 1.4393,0.62885 2.71446,1.40857 2.83092,3.25336 l 9.23869,98.00269 c 0.34728,1.9513 -0.60931,3.03547 -1.88462,3.2408 z"
        sodipodi:nodetypes="ccccccccccc" />
-    <rect
-       style="fill:blue;fill-opacity:1;fill-rule:evenodd;stroke-width:1.01688"
-       id="rect15838-0-6-3-2-0-6-1-5"
-       width="51.999218"
-       height="200.07597"
-       x="941.74878"
-       y="182.73505" />
-    <rect
-       style="fill:blue;fill-opacity:1;fill-rule:evenodd;stroke-width:1.01688"
-       id="rect15838-0-6-3-2-0-6-1-5-5"
-       width="51.999218"
-       height="200.07597"
-       x="117.22348"
-       y="173.03622" />
     <ellipse
        style="fill:white;fill-opacity:1;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path34292"
@@ -2214,6 +2200,64 @@
       </g>
     </g>
     <g
+       id="g104332-3"
+       style="display:inline"
+       transform="translate(-230)">
+      <path
+         id="rect15838-0-6-3-2-0-6-1-5-5-4-6"
+         style="fill:#efecec;fill-rule:evenodd;stroke:black;stroke-width:2;stroke-linejoin:round"
+         d="m 378.62827,185.03595 c 25.98451,0.0412 25.99961,46.67421 25.99961,51.58405 v 77.484 l -17.95836,62.02826 c -0.45061,1.63943 -4.05234,8.90987 -8.25277,8.97988 -4.43444,-0.14623 -7.29338,-7.34644 -7.85448,-8.85668 L 352.62866,314.104 V 236.62 c 0.25626,-5.54188 -0.90434,-51.62672 25.99961,-51.58405 z"
+         sodipodi:nodetypes="ssccccccs" />
+      <g
+         id="g82515-8-05"
+         name="indicatorFuelTipLeft"
+         style="display:inline"
+         transform="translate(-165.12989,-251.41227)">
+        <g
+           id="g54864-7-0"
+           transform="translate(-17.501626,-3.539972)">
+          <foreignObject
+             y="416.28134"
+             x="541.48181"
+             height="16.910061"
+             width="39.975704">
+            <html:input
+               type="text"
+               style="display:none; background-color:white;" />
+          </foreignObject>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px"
+             x="536.4519"
+             y="431.36862"
+             id="text78689-0-29"><tspan
+               sodipodi:role="line"
+               id="tspan85712-4-4"
+               x="536.4519"
+               y="431.36862">100 lbs</tspan></text>
+        </g>
+        <g
+           id="g46847-80-3"
+           transform="translate(-17.501638,74.846179)">
+          <rect
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-4-5"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178" />
+          <rect
+             style="display:inline;fill:#36d4dc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-1-2-1"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178"
+             name="barGauge" />
+        </g>
+      </g>
+    </g>
+    <g
        id="g104332-6"
        style="display:inline"
        transform="translate(-60)">
@@ -3302,7 +3346,8 @@
       </g>
       <g
          id="g115870"
-         transform="matrix(0.58533324,0,0,0.53968795,338.32687,212.75708)">
+         transform="matrix(0.58533324,0,0,0.53968795,338.32687,212.75708)"
+         name="switchTipTankLeft">
         <text
            xml:space="preserve"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline"
@@ -3338,7 +3383,7 @@
         <g
            id="g76354-2"
            transform="translate(672.15912,-129.93466)"
-           name="switchBatteryOff"
+           name="switchDown"
            style="display:inline">
           <path
              id="rect49653-6"
@@ -3367,7 +3412,7 @@
         <g
            id="g76354-7-9"
            transform="rotate(180,557.3869,625.54093)"
-           name="switchBatteryOn"
+           name="switchUp"
            style="display:inline">
           <path
              id="rect49653-5-6"
@@ -3393,11 +3438,45 @@
              rx="5.2702904"
              ry="1.3506273" />
         </g>
+        <g
+           id="g77711-8"
+           name="switchMiddle"
+           style="display:inline">
+          <circle
+             style="opacity:1;fill:#b6b6b6;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.438159;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path72328-7"
+             cx="893.50037"
+             cy="562.52936"
+             r="15.910142" />
+          <circle
+             style="opacity:1;fill:#e3e3e3;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.292336;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path74267-9"
+             cx="893.50037"
+             cy="562.52936"
+             r="5.2342162" />
+          <rect
+             style="opacity:0;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.23082"
+             id="rect79127-0"
+             width="36.867729"
+             height="39.195995"
+             x="875.06647"
+             y="523.33331"
+             name="switchToggleUp" />
+          <rect
+             style="display:inline;opacity:0;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.23082"
+             id="rect79127-6-3"
+             width="36.867729"
+             height="39.195995"
+             x="875.06653"
+             y="562.52936"
+             name="switchToggleDown" />
+        </g>
       </g>
       <g
          id="g115870-0"
          transform="matrix(0.58533324,0,0,0.53968795,413.96788,212.75708)"
-         style="display:inline">
+         style="display:inline"
+         name="switchTipTankRight">
         <text
            xml:space="preserve"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline"
@@ -3433,7 +3512,7 @@
         <g
            id="g76354-2-7"
            transform="translate(672.15912,-129.93466)"
-           name="switchBatteryOff"
+           name="switchDown"
            style="display:inline">
           <path
              id="rect49653-6-9"
@@ -3462,7 +3541,7 @@
         <g
            id="g76354-7-9-8"
            transform="rotate(180,557.3869,625.54093)"
-           name="switchBatteryOn"
+           name="switchUp"
            style="display:inline">
           <path
              id="rect49653-5-6-3"
@@ -3487,6 +3566,39 @@
              cy="744.06195"
              rx="5.2702904"
              ry="1.3506273" />
+        </g>
+        <g
+           id="g77711-8-3"
+           name="switchMiddle"
+           style="display:inline">
+          <circle
+             style="opacity:1;fill:#b6b6b6;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.438159;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path72328-7-3"
+             cx="893.50037"
+             cy="562.52936"
+             r="15.910142" />
+          <circle
+             style="opacity:1;fill:#e3e3e3;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.292336;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path74267-9-7"
+             cx="893.50037"
+             cy="562.52936"
+             r="5.2342162" />
+          <rect
+             style="opacity:0;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.23082"
+             id="rect79127-0-3"
+             width="36.867729"
+             height="39.195995"
+             x="875.06647"
+             y="523.33331"
+             name="switchToggleUp" />
+          <rect
+             style="display:inline;opacity:0;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.23082"
+             id="rect79127-6-3-2"
+             width="36.867729"
+             height="39.195995"
+             x="875.06653"
+             y="562.52936"
+             name="switchToggleDown" />
         </g>
       </g>
       <text
@@ -4960,5 +5072,285 @@
        x="332.67798"
        y="203.82687"
        name="fuelLinePylonToPylonLeft" />
+    <rect
+       style="display:inline;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.52638;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect105083-9-7"
+       width="33.826805"
+       height="5.7026777"
+       x="155.48634"
+       y="310.09784"
+       name="fuelLineTipToWingLeft" />
+    <rect
+       style="display:inline;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.289309;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect105083-9-7-2"
+       width="34.063877"
+       height="1.7106907"
+       x="155.36781"
+       y="302.64389"
+       name="fuelLineTipToWingVentLeft" />
+    <g
+       id="g54267-9-4"
+       name="pumpTipLeft"
+       transform="matrix(0.67695516,0,0,0.67695516,-231.31947,14.05061)"
+       style="display:inline">
+      <rect
+         style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect51111-8-3"
+         width="25"
+         height="25"
+         x="548.75983"
+         y="434.44464"
+         ry="2.28211"
+         name="background" />
+      <g
+         id="g54269-72-1"
+         name="impeller">
+        <animateTransform
+           type="rotate"
+           from="0"
+           to="0"
+           dur="0.5s"
+           repeatCount="indefinite"
+           attributeName="transform" />
+        <g
+           id="g53451-8-4"
+           transform="matrix(1.2965368,0,0,1.2965368,-21.902983,-53.221256)">
+          <path
+             sodipodi:type="star"
+             style="fill:black;fill-opacity:1;stroke:black;stroke-width:0.771285;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path52462-29-6"
+             inkscape:flatsided="true"
+             sodipodi:sides="6"
+             sodipodi:cx="449.785"
+             sodipodi:cy="385.77069"
+             sodipodi:r1="3.6980927"
+             sodipodi:r2="5.3063846"
+             sodipodi:arg1="1.0507653"
+             sodipodi:arg2="1.5743641"
+             inkscape:rounded="0"
+             inkscape:randomized="0"
+             d="m 451.62261,388.97991 -3.69807,-0.0132 -1.83761,-3.20922 1.86047,-3.19603 3.69806,0.0132 1.83761,3.20921 z" />
+          <path
+             style="fill:none;stroke:black;stroke-width:1.15693;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 451.54417,382.78266 h 5.88895"
+             id="path52497-9-9" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#path52497-9-9"
+             id="use52579-6-4"
+             transform="rotate(-120,456.24708,385.525)"
+             width="100%"
+             height="100%" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#path52497-9-9"
+             id="use52581-02-2"
+             transform="translate(-9.5592083,5.9370174)"
+             width="100%"
+             height="100%" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#use52581-02-2"
+             id="use52583-7-2"
+             transform="rotate(60,449.59897,386.13592)"
+             width="100%"
+             height="100%" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#path52497-9-9"
+             id="use52585-6-6"
+             transform="rotate(120,449.80959,385.75131)"
+             width="100%"
+             height="100%" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#path52497-9-9"
+             id="use52587-1-4"
+             transform="rotate(-60,449.91416,385.76043)"
+             width="100%"
+             height="100%" />
+          <circle
+             style="fill:white;fill-opacity:1;stroke:none;stroke-width:0.65;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path53037-3-1"
+             cx="449.785"
+             cy="385.77069"
+             r="1.8" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g104332-3-8"
+       style="display:inline"
+       transform="translate(597.02762)">
+      <path
+         id="rect15838-0-6-3-2-0-6-1-5-5-4-6-8"
+         style="fill:#efecec;fill-rule:evenodd;stroke:black;stroke-width:2;stroke-linejoin:round"
+         d="m 378.62827,185.03595 c 25.98451,0.0412 25.99961,46.67421 25.99961,51.58405 v 77.484 l -17.95836,62.02826 c -0.45061,1.63943 -4.05234,8.90987 -8.25277,8.97988 -4.43444,-0.14623 -7.29338,-7.34644 -7.85448,-8.85668 L 352.62866,314.104 V 236.62 c 0.25626,-5.54188 -0.90434,-51.62672 25.99961,-51.58405 z"
+         sodipodi:nodetypes="ssccccccs" />
+      <g
+         id="g82515-8-05-9"
+         name="indicatorFuelTipRight"
+         style="display:inline"
+         transform="translate(-165.12989,-251.41227)">
+        <g
+           id="g54864-7-0-2"
+           transform="translate(-17.501626,-3.539972)">
+          <foreignObject
+             y="416.28134"
+             x="541.48181"
+             height="16.910061"
+             width="39.975704">
+            <html:input
+               type="text"
+               style="display:none; background-color:white;" />
+          </foreignObject>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px"
+             x="536.4519"
+             y="431.36862"
+             id="text78689-0-29-8"><tspan
+               sodipodi:role="line"
+               id="tspan85712-4-4-8"
+               x="536.4519"
+               y="431.36862">100 lbs</tspan></text>
+        </g>
+        <g
+           id="g46847-80-3-8"
+           transform="translate(-17.501638,74.846179)">
+          <rect
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-4-5-6"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178" />
+          <rect
+             style="display:inline;fill:#36d4dc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-1-2-1-8"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178"
+             name="barGauge" />
+        </g>
+      </g>
+    </g>
+    <rect
+       style="display:inline;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.52638;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect105083-9-7-3"
+       width="33.826805"
+       height="5.7026777"
+       x="936.51398"
+       y="310.09784"
+       name="fuelLineTipToWingRight" />
+    <rect
+       style="display:inline;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.289309;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect105083-9-7-2-8"
+       width="34.063877"
+       height="1.7106907"
+       x="936.39545"
+       y="302.64389"
+       name="fuelLineTipToWingVentRight" />
+    <g
+       id="g54267-9-4-3"
+       name="pumpTipRight"
+       transform="matrix(0.67695516,0,0,0.67695516,595.70815,14.05061)"
+       style="display:inline">
+      <rect
+         style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect51111-8-3-3"
+         width="25"
+         height="25"
+         x="548.75983"
+         y="434.44464"
+         ry="2.28211"
+         name="background" />
+      <g
+         id="g54269-72-1-3"
+         name="impeller">
+        <animateTransform
+           type="rotate"
+           from="0"
+           to="0"
+           dur="0.5s"
+           repeatCount="indefinite"
+           attributeName="transform" />
+        <g
+           id="g53451-8-4-8"
+           transform="matrix(1.2965368,0,0,1.2965368,-21.902983,-53.221256)">
+          <path
+             sodipodi:type="star"
+             style="fill:black;fill-opacity:1;stroke:black;stroke-width:0.771285;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path52462-29-6-0"
+             inkscape:flatsided="true"
+             sodipodi:sides="6"
+             sodipodi:cx="449.785"
+             sodipodi:cy="385.77069"
+             sodipodi:r1="3.6980927"
+             sodipodi:r2="5.3063846"
+             sodipodi:arg1="1.0507653"
+             sodipodi:arg2="1.5743641"
+             inkscape:rounded="0"
+             inkscape:randomized="0"
+             d="m 451.62261,388.97991 -3.69807,-0.0132 -1.83761,-3.20922 1.86047,-3.19603 3.69806,0.0132 1.83761,3.20921 z" />
+          <path
+             style="fill:none;stroke:black;stroke-width:1.15693;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 451.54417,382.78266 h 5.88895"
+             id="path52497-9-9-4" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#path52497-9-9-4"
+             id="use52579-6-4-7"
+             transform="rotate(-120,456.24708,385.525)"
+             width="100%"
+             height="100%" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#path52497-9-9-4"
+             id="use52581-02-2-6"
+             transform="translate(-9.5592083,5.9370174)"
+             width="100%"
+             height="100%" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#use52581-02-2-6"
+             id="use52583-7-2-8"
+             transform="rotate(60,449.59897,386.13592)"
+             width="100%"
+             height="100%" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#path52497-9-9-4"
+             id="use52585-6-6-9"
+             transform="rotate(120,449.80959,385.75131)"
+             width="100%"
+             height="100%" />
+          <use
+             x="0"
+             y="0"
+             xlink:href="#path52497-9-9-4"
+             id="use52587-1-4-0"
+             transform="rotate(-60,449.91416,385.76043)"
+             width="100%"
+             height="100%" />
+          <circle
+             style="fill:white;fill-opacity:1;stroke:none;stroke-width:0.65;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path53037-3-1-6"
+             cx="449.785"
+             cy="385.77069"
+             r="1.8" />
+        </g>
+      </g>
+    </g>
   </g>
 </svg>
