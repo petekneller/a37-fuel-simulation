@@ -33,15 +33,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="0.90520772"
-     inkscape:cx="224.81028"
-     inkscape:cy="239.72398"
+     inkscape:zoom="1.280157"
+     inkscape:cx="508.92194"
+     inkscape:cy="237.47087"
      inkscape:window-width="2556"
      inkscape:window-height="1401"
      inkscape:window-x="3200"
      inkscape:window-y="18"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g139838"
+     inkscape:current-layer="layer1"
      inkscape:snap-midpoints="true"
      units="mm"
      inkscape:snap-center="true"
@@ -1022,34 +1022,6 @@
        height="200.07597"
        x="117.22348"
        y="173.03622" />
-    <rect
-       style="fill:blue;fill-opacity:1;fill-rule:evenodd;stroke-width:1.01688"
-       id="rect15838-0-6-3-2-0-6-1-5-5-4"
-       width="51.999218"
-       height="200.07597"
-       x="352.62866"
-       y="185.03595" />
-    <rect
-       style="fill:blue;fill-opacity:1;fill-rule:evenodd;stroke-width:1.01688"
-       id="rect15838-0-6-3-2-0-6-1-5-5-4-7"
-       width="51.999218"
-       height="200.07597"
-       x="257.62589"
-       y="185.42609" />
-    <rect
-       style="fill:blue;fill-opacity:1;fill-rule:evenodd;stroke-width:1.01688"
-       id="rect15838-0-6-3-2-0-6-1-5-5-4-7-6"
-       width="51.999218"
-       height="200.07597"
-       x="687.92114"
-       y="182.05681" />
-    <rect
-       style="fill:blue;fill-opacity:1;fill-rule:evenodd;stroke-width:1.01688"
-       id="rect15838-0-6-3-2-0-6-1-5-5-4-7-6-5"
-       width="51.999218"
-       height="200.07597"
-       x="789.24597"
-       y="180.76057" />
     <ellipse
        style="fill:white;fill-opacity:1;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path34292"
@@ -2183,6 +2155,120 @@
            x="552.17279"
            y="368.01178"
            name="barGauge" />
+      </g>
+    </g>
+    <g
+       id="g104332">
+      <path
+         id="rect15838-0-6-3-2-0-6-1-5-5-4"
+         style="fill:#efecec;fill-rule:evenodd;stroke:black;stroke-width:2;stroke-linejoin:round"
+         d="m 378.62827,185.03595 c 25.98451,0.0412 25.99961,46.67421 25.99961,51.58405 v 77.484 l -17.95836,62.02826 c -0.45061,1.63943 -4.05234,8.90987 -8.25277,8.97988 -4.43444,-0.14623 -7.29338,-7.34644 -7.85448,-8.85668 L 352.62866,314.104 V 236.62 c 0.25626,-5.54188 -0.90434,-51.62672 25.99961,-51.58405 z"
+         sodipodi:nodetypes="ssccccccs" />
+      <g
+         id="g82515-8"
+         name="indicatorFuelPylonLeftInner"
+         style="display:inline"
+         transform="translate(-165.12989,-251.41227)">
+        <g
+           id="g54864-7"
+           transform="translate(-17.501626,-3.539972)">
+          <foreignObject
+             y="416.28134"
+             x="541.48181"
+             height="16.910061"
+             width="39.975704">
+            <html:input
+               type="text"
+               style="display:none; background-color:white;" />
+          </foreignObject>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px"
+             x="536.4519"
+             y="431.36862"
+             id="text78689-0"><tspan
+               sodipodi:role="line"
+               id="tspan85712-4"
+               x="536.4519"
+               y="431.36862">100 lbs</tspan></text>
+        </g>
+        <g
+           id="g46847-80"
+           transform="translate(-17.501638,74.846179)">
+          <rect
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-4"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178" />
+          <rect
+             style="display:inline;fill:#36d4dc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-1-2"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178"
+             name="barGauge" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g104332-6"
+       style="display:inline"
+       transform="translate(-60)">
+      <path
+         id="rect15838-0-6-3-2-0-6-1-5-5-4-1"
+         style="fill:#efecec;fill-rule:evenodd;stroke:black;stroke-width:2;stroke-linejoin:round"
+         d="m 378.62827,185.03595 c 25.98451,0.0412 25.99961,46.67421 25.99961,51.58405 v 77.484 l -17.95836,62.02826 c -0.45061,1.63943 -4.05234,8.90987 -8.25277,8.97988 -4.43444,-0.14623 -7.29338,-7.34644 -7.85448,-8.85668 L 352.62866,314.104 V 236.62 c 0.25626,-5.54188 -0.90434,-51.62672 25.99961,-51.58405 z"
+         sodipodi:nodetypes="ssccccccs" />
+      <g
+         id="g82515-8-0"
+         name="indicatorFuelPylonLeftOuter"
+         style="display:inline"
+         transform="translate(-165.12989,-251.41227)">
+        <g
+           id="g54864-7-4"
+           transform="translate(-17.501626,-3.539972)">
+          <foreignObject
+             y="416.28134"
+             x="541.48181"
+             height="16.910061"
+             width="39.975704">
+            <html:input
+               type="text"
+               style="display:none; background-color:white;" />
+          </foreignObject>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px"
+             x="536.4519"
+             y="431.36862"
+             id="text78689-0-2"><tspan
+               sodipodi:role="line"
+               id="tspan85712-4-2"
+               x="536.4519"
+               y="431.36862">100 lbs</tspan></text>
+        </g>
+        <g
+           id="g46847-80-2"
+           transform="translate(-17.501638,74.846179)">
+          <rect
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-4-0"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178" />
+          <rect
+             style="display:inline;fill:#36d4dc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-1-2-5"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178"
+             name="barGauge" />
+        </g>
       </g>
     </g>
     <text
@@ -3938,6 +4024,122 @@
       </g>
     </g>
     <g
+       id="g104332-2"
+       style="display:inline"
+       transform="translate(426)">
+      <path
+         id="rect15838-0-6-3-2-0-6-1-5-5-4-9"
+         style="fill:#efecec;fill-rule:evenodd;stroke:black;stroke-width:2;stroke-linejoin:round"
+         d="m 378.62827,185.03595 c 25.98451,0.0412 25.99961,46.67421 25.99961,51.58405 v 77.484 l -17.95836,62.02826 c -0.45061,1.63943 -4.05234,8.90987 -8.25277,8.97988 -4.43444,-0.14623 -7.29338,-7.34644 -7.85448,-8.85668 L 352.62866,314.104 V 236.62 c 0.25626,-5.54188 -0.90434,-51.62672 25.99961,-51.58405 z"
+         sodipodi:nodetypes="ssccccccs" />
+      <g
+         id="g82515-8-02"
+         name="indicatorFuelPylonRightOuter"
+         style="display:inline"
+         transform="translate(-165.12989,-251.41227)">
+        <g
+           id="g54864-7-8"
+           transform="translate(-17.501626,-3.539972)">
+          <foreignObject
+             y="416.28134"
+             x="541.48181"
+             height="16.910061"
+             width="39.975704">
+            <html:input
+               type="text"
+               style="display:none; background-color:white;" />
+          </foreignObject>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px"
+             x="536.4519"
+             y="431.36862"
+             id="text78689-0-3"><tspan
+               sodipodi:role="line"
+               id="tspan85712-4-8"
+               x="536.4519"
+               y="431.36862">100 lbs</tspan></text>
+        </g>
+        <g
+           id="g46847-80-0"
+           transform="translate(-17.501638,74.846179)">
+          <rect
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-4-4"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178" />
+          <rect
+             style="display:inline;fill:#36d4dc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-1-2-0"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178"
+             name="barGauge" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g104332-6-9"
+       style="display:inline"
+       transform="translate(366)">
+      <path
+         id="rect15838-0-6-3-2-0-6-1-5-5-4-1-1"
+         style="fill:#efecec;fill-rule:evenodd;stroke:black;stroke-width:2;stroke-linejoin:round"
+         d="m 378.62827,185.03595 c 25.98451,0.0412 25.99961,46.67421 25.99961,51.58405 v 77.484 l -17.95836,62.02826 c -0.45061,1.63943 -4.05234,8.90987 -8.25277,8.97988 -4.43444,-0.14623 -7.29338,-7.34644 -7.85448,-8.85668 L 352.62866,314.104 V 236.62 c 0.25626,-5.54188 -0.90434,-51.62672 25.99961,-51.58405 z"
+         sodipodi:nodetypes="ssccccccs" />
+      <g
+         id="g82515-8-0-9"
+         name="indicatorFuelPylonRightInner"
+         style="display:inline"
+         transform="translate(-165.12989,-251.41227)">
+        <g
+           id="g54864-7-4-6"
+           transform="translate(-17.501626,-3.539972)">
+          <foreignObject
+             y="416.28134"
+             x="541.48181"
+             height="16.910061"
+             width="39.975704">
+            <html:input
+               type="text"
+               style="display:none; background-color:white;" />
+          </foreignObject>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px"
+             x="536.4519"
+             y="431.36862"
+             id="text78689-0-2-2"><tspan
+               sodipodi:role="line"
+               id="tspan85712-4-2-5"
+               x="536.4519"
+               y="431.36862">100 lbs</tspan></text>
+        </g>
+        <g
+           id="g46847-80-2-4"
+           transform="translate(-17.501638,74.846179)">
+          <rect
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-4-0-4"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178" />
+          <rect
+             style="display:inline;fill:#36d4dc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect81257-1-2-5-9"
+             width="18.174015"
+             height="47.180523"
+             x="552.17279"
+             y="368.01178"
+             name="barGauge" />
+        </g>
+      </g>
+    </g>
+    <g
        id="g50964">
       <g
          id="g46791-9"
@@ -4265,7 +4467,7 @@
        width="187.99976"
        height="5.5160685"
        x="177.66083"
-       y="-600.90686"
+       y="-592.90686"
        transform="rotate(90)"
        name="fuelLineSeatToFuselage" />
     <g
@@ -4735,6 +4937,28 @@
     <path
        id="rect52053"
        style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 399.48828 203.83398 L 399.48828 209.54883 L 490.69531 209.54883 L 517.14453 236.16602 L 517.14453 278.375 L 523.01172 278.375 L 523.01172 234.59375 L 523.32617 234.2793 L 493.07227 203.83398 L 399.48828 203.83398 z " />
+       d="M 394.15625 203.83398 L 394.15625 209.54883 L 399.48828 209.54883 L 412.82031 209.54883 L 490.69531 209.54883 L 517.14453 236.16602 L 517.14453 278.375 L 523.01172 278.375 L 523.01172 234.59375 L 523.32617 234.2793 L 493.07227 203.83398 L 412.82031 203.83398 L 399.48828 203.83398 L 394.15625 203.83398 z "
+       name="fuelLinePylonToFuselageLeft" />
+    <rect
+       style="display:inline;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect105083-9-9"
+       width="30.380711"
+       height="5.7290578"
+       x="758.67798"
+       y="203.82687"
+       name="fuelLinePylonToPylonRight" />
+    <path
+       id="rect52053-5"
+       style="display:inline;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 728.52226,203.83398 v 5.71485 h -5.33203 -13.33203 -77.875 l -26.44922,26.61719 V 278.375 h -5.86719 v -43.78125 l -0.31445,-0.31445 30.2539,-30.44532 h 80.25196 13.33203 z"
+       name="fuelLinePylonToFuselageRight" />
+    <rect
+       style="display:inline;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect105083-9"
+       width="30.380711"
+       height="5.7290578"
+       x="332.67798"
+       y="203.82687"
+       name="fuelLinePylonToPylonLeft" />
   </g>
 </svg>
