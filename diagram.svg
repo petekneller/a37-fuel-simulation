@@ -33,15 +33,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="7.0483862"
-     inkscape:cx="594.95888"
-     inkscape:cy="152.23343"
-     inkscape:window-width="1916"
-     inkscape:window-height="1041"
-     inkscape:window-x="0"
+     inkscape:zoom="0.90520772"
+     inkscape:cx="224.81028"
+     inkscape:cy="239.72398"
+     inkscape:window-width="2556"
+     inkscape:window-height="1401"
+     inkscape:window-x="3200"
      inkscape:window-y="18"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g139838"
      inkscape:snap-midpoints="true"
      units="mm"
      inkscape:snap-center="true"
@@ -2398,7 +2398,8 @@
       <g
          id="g111413-6"
          transform="translate(-61.880662,114.05741)"
-         style="display:inline">
+         style="display:inline"
+         name="seatTankEmpty">
         <rect
            style="fill:#ffab03;fill-rule:evenodd;stroke:black;stroke-width:0.753049;stroke-opacity:1;fill-opacity:1"
            id="rect111241-0"

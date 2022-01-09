@@ -3,14 +3,13 @@ window.app = function() {
   const SIM_CALCULATION_FREQUENCY = 4; // the frequency of sim loops
   const DEFAULT_SIM_SPEED_FACTOR = 1; // rate of simulation relative to real time
   const MAX_SINGLE_ENGINE_FUEL_FLOW = 3200; // lbs / hr
-  const FUEL_LINE_COLOUR = '#36d4dc';
   const MAX_FUSELAGE_FUEL = 514;
   const MAX_WING_FUEL = 645;
   const MAX_SEAT_FUEL = 195;
   const TANK_SELECTOR_WINGS = Symbol('wings');
   const TANK_SELECTOR_SEAT = Symbol('seat');
   const TANK_SELECTOR_PYLONS = Symbol('pylons');
-  const PROPORTIONER_PUMPS_FUEL_FLOW = 8000; // lbs / hr
+  const TRANSFER_PUMPS_FUEL_FLOW = 8000; // lbs / hr
 
   /* Runtime */
 
@@ -33,35 +32,51 @@ window.app = function() {
 
   const engineIsRunning = () => state.powerSetting > 0;
 
+  const seatTransferPumpIsOn = () => engineIsRunning() && state.fuelTankSelector == TANK_SELECTOR_SEAT;
+
   const updateFuelLevels = () => {
     // fuselage tank
     const totalEngineFuelFlow = 2 * MAX_SINGLE_ENGINE_FUEL_FLOW * state.powerSetting / 100;
     const fuselageFuelConsumedLastPeriod = (totalEngineFuelFlow * state.simSpeedFactor) / (3600 * SIM_CALCULATION_FREQUENCY);
 
     const fuelAvailableInFuselageSource =
-          state.fuelTankSelector == TANK_SELECTOR_WINGS ? (state.fuelWingLeft + state.fuelWingRight) : 0;
-    const nominalFuelTransferredToFuselage = (state.simSpeedFactor * PROPORTIONER_PUMPS_FUEL_FLOW) / (3600 * SIM_CALCULATION_FREQUENCY);
-    const fuelTransferredToFuselage = state.proportionerPumpsOn ?
-          Math.min(fuelAvailableInFuselageSource, nominalFuelTransferredToFuselage) :
+      state.fuelTankSelector == TANK_SELECTOR_WINGS ?
+        (state.fuelWingLeft + state.fuelWingRight) :
+          state.fuelTankSelector == TANK_SELECTOR_SEAT ?
+          state.fuelSeat :
           0;
+    const nominalFuelTransferredToFuselage = (state.proportionerPumpsOn || seatTransferPumpIsOn()) ?
+          (state.simSpeedFactor * TRANSFER_PUMPS_FUEL_FLOW) / (3600 * SIM_CALCULATION_FREQUENCY) :
+          0;
+    let fuelTransferredToFuselage = Math.min(fuelAvailableInFuselageSource, nominalFuelTransferredToFuselage);
     const netFuselageFlow = fuelTransferredToFuselage - fuselageFuelConsumedLastPeriod;
     state.fuelFuselage = Math.max(state.fuelFuselage + netFuselageFlow, 0);
+    if (state.fuelFuselage > MAX_FUSELAGE_FUEL) {
+      const overflow = state.fuelFuselage - MAX_FUSELAGE_FUEL;
+      state.fuelFuselage = MAX_FUSELAGE_FUEL;
+      fuelTransferredToFuselage = fuelTransferredToFuselage - overflow;
+    }
 
     // wing tanks
     // the proportioner pumps draw equally from each side, but presumably will draw the whole amount from one side if the other is empty
-    const wingFuelTransferredToFuselage = (state.fuelTankSelector == TANK_SELECTOR_WINGS) ? fuelTransferredToFuselage : 0;
-    // left tank
-    const leftWingNominalOutflow = Math.min(state.fuelWingLeft, wingFuelTransferredToFuselage / 2);
-    const rightWingNominalOutflow = Math.min(state.fuelWingRight, wingFuelTransferredToFuselage / 2);
-    const leftWingOutflow = wingFuelTransferredToFuselage - rightWingNominalOutflow;
-    state.fuelWingLeft = Math.max(state.fuelWingLeft - leftWingOutflow, 0)
-    const rightWingOutflow = wingFuelTransferredToFuselage - leftWingNominalOutflow;
-    state.fuelWingRight = Math.max(state.fuelWingRight - rightWingOutflow, 0)
+    if (state.proportionerPumpsOn && state.fuelTankSelector == TANK_SELECTOR_WINGS) {
+      const leftWingNominalOutflow = Math.min(state.fuelWingLeft, fuelTransferredToFuselage / 2);
+      const rightWingNominalOutflow = Math.min(state.fuelWingRight, fuelTransferredToFuselage / 2);
+      const leftWingOutflow = fuelTransferredToFuselage - rightWingNominalOutflow;
+      state.fuelWingLeft = Math.max(state.fuelWingLeft - leftWingOutflow, 0)
+      const rightWingOutflow = fuelTransferredToFuselage - leftWingNominalOutflow;
+      state.fuelWingRight = Math.max(state.fuelWingRight - rightWingOutflow, 0)
+    }
+
+    // seat tank
+    if (seatTransferPumpIsOn()) {
+      state.fuelSeat = Math.max(state.fuelSeat - fuelTransferredToFuselage, 0)
+    }
 
   };
 
-  const PROPORTIONER_PUMPS_FUEL_ON = 450;
-  const PROPORTIONER_PUMPS_FUEL_OFF = 500; // manual specifieds 520 +/- 20, but max fuel is 514
+  const TRANSFER_PUMPS_FUEL_ON = 450;
+  const TRANSFER_PUMPS_FUEL_OFF = 500; // manual specifieds 520 +/- 20, but max fuel is 514
 
   const updateSimulation = () => {
     // Calculation of fuel flows/levels is retrospective - the fuel used in the
@@ -73,8 +88,17 @@ window.app = function() {
     state.powerSetting = engineCanRun() ? throttlePosition() : 0;
     state.proportionerPumpsOn = engineIsRunning() &&
       (state.fuelTankSelector != TANK_SELECTOR_SEAT) &&
-      (state.fuelFuselage < PROPORTIONER_PUMPS_FUEL_ON ||
-       (state.fuelFuselage < PROPORTIONER_PUMPS_FUEL_OFF && state.proportionerPumpsOn));
+      (state.fuelFuselage < TRANSFER_PUMPS_FUEL_ON ||
+       (state.fuelFuselage < TRANSFER_PUMPS_FUEL_OFF && state.proportionerPumpsOn));
+  };
+
+  const FUEL_LINE_COLOUR = '#36d4dc';
+  const FUEL_VENT_COLOUR = '#36dc91';
+  const renderFuelLine = (cssSelector, hasFuelFlow) => {
+    document.querySelector(cssSelector).style.setProperty('fill', hasFuelFlow ? FUEL_LINE_COLOUR : 'white');
+  };
+  const renderVentLine = (cssSelector, isOverflowing) => {
+    document.querySelector(cssSelector).style.setProperty('fill', isOverflowing ? FUEL_VENT_COLOUR : 'white');
   };
 
   const renderPump = (pumpName, isOn, hasPressure) => {
@@ -86,9 +110,7 @@ window.app = function() {
         setAttribute('to', isOn ? '60' : '0');
     });
 
-    document.
-      querySelector(`g[name="${pumpName}"] [name="background"]`).
-      style.setProperty('fill', hasPressure ? FUEL_LINE_COLOUR : 'white');
+    renderFuelLine(`g[name="${pumpName}"] [name="background"]`, hasPressure);
   };
 
   const renderEngines = () => {
@@ -117,9 +139,7 @@ window.app = function() {
     renderPump('pumpEngineRight', engineIsRunning(), engineIsRunning());
 
     // Fuel lines
-    document.
-      querySelector('path[name="fuelLineFuselageToEngine"]').
-      style.setProperty('fill', engineIsRunning() ? FUEL_LINE_COLOUR : 'white');
+    renderFuelLine('path[name="fuelLineFuselageToEngine"]', engineIsRunning());
 
     // Fuel flow gauge
     const singleEngineFuelFlow = MAX_SINGLE_ENGINE_FUEL_FLOW * state.powerSetting / 100;
@@ -164,6 +184,7 @@ window.app = function() {
   const renderAnnunciatorPanel = () => {
     renderAnnunciatorLamp('boostOff', state.fuelFuselage < 1);
     renderAnnunciatorLamp('fuelLow', state.fuelFuselage < 295);
+    renderAnnunciatorLamp('seatTankEmpty', seatTransferPumpIsOn() && state.fuelFuselage < 375);
   };
 
   const SWITCH_3_POS_UP = Symbol('up');
@@ -221,10 +242,8 @@ window.app = function() {
           false;
     renderPump('pumpProportioners', state.proportionerPumpsOn, state.proportionerPumpsOn && hasFuel);
 
-    document.querySelector('path[name="fuelLineWingToFuselageLeft"]').
-      style.setProperty('fill', ((state.fuelTankSelector == TANK_SELECTOR_WINGS) && state.proportionerPumpsOn && hasLeftWingFuel) ? FUEL_LINE_COLOUR : 'white');
-    document.querySelector('path[name="fuelLineWingToFuselageRight"]').
-      style.setProperty('fill', ((state.fuelTankSelector == TANK_SELECTOR_WINGS) && state.proportionerPumpsOn && hasRightWingFuel) ? FUEL_LINE_COLOUR : 'white');
+    renderFuelLine('path[name="fuelLineWingToFuselageLeft"]', (state.fuelTankSelector == TANK_SELECTOR_WINGS) && state.proportionerPumpsOn && hasLeftWingFuel);
+    renderFuelLine('path[name="fuelLineWingToFuselageRight"]', (state.fuelTankSelector == TANK_SELECTOR_WINGS) && state.proportionerPumpsOn && hasRightWingFuel);
   };
 
   const renderWingTanks = () => {
@@ -234,6 +253,11 @@ window.app = function() {
 
   const renderSeatTank = () => {
     renderFuelTankIndicator('indicatorFuelSeat', state.fuelSeat, MAX_SEAT_FUEL);
+    const pumpHasPressure = seatTransferPumpIsOn() && state.fuelSeat > 0;
+    renderPump('pumpSeat', seatTransferPumpIsOn(), pumpHasPressure);
+    renderFuelLine('rect[name="fuelLineSeatToFuselage"]', pumpHasPressure);
+    const lineIsOverflowing = pumpHasPressure && (state.fuelFuselage >= MAX_FUSELAGE_FUEL);
+    renderVentLine('rect[name="fuelLineSeatToFuselageVent"]', lineIsOverflowing);
   };
 
   const renderUI = () => {
