@@ -59,7 +59,7 @@ window.app = function() {
   };
 
   const PROPORTIONER_PUMPS_FUEL_ON = 450;
-  const PROPORTIONER_PUMPS_FUEL_OFF = 500;
+  const PROPORTIONER_PUMPS_FUEL_OFF = 500; // manual specifieds 520 +/- 20, but max fuel is 514
 
   const updateSimulation = () => {
     // Calculation of fuel flows/levels is retrospective - the fuel used in the
@@ -70,6 +70,7 @@ window.app = function() {
 
     state.powerSetting = engineCanRun() ? throttlePosition() : 0;
     state.proportionerPumpsOn = engineIsRunning() &&
+      (state.fuelTankSelector != TANK_SELECTOR_SEAT) &&
       (state.fuelFuselage < PROPORTIONER_PUMPS_FUEL_ON ||
        (state.fuelFuselage < PROPORTIONER_PUMPS_FUEL_OFF && state.proportionerPumpsOn));
   };
