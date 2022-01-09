@@ -6,6 +6,8 @@ window.app = function() {
   const FUEL_LINE_COLOUR = '#36d4dc';
   const MAX_FUSELAGE_FUEL = 514;
   const MAX_WING_FUEL = 645;
+  const TANK_SELECTOR_WINGS = Symbol('wings');
+  const PROPORTIONER_PUMPS_FUEL_FLOW = 8000; // lbs / hr
 
   /* Runtime */
 
@@ -17,6 +19,7 @@ window.app = function() {
     fuelWingLeft: MAX_WING_FUEL,
     fuelWingRight: MAX_WING_FUEL,
     proportionerPumpsOn: false,
+    fuelTankSelector: TANK_SELECTOR_WINGS,
   };
 
   const throttlePosition = () =>
@@ -29,8 +32,28 @@ window.app = function() {
   const updateFuelLevels = () => {
     // fuselage tank
     const totalEngineFuelFlow = 2 * MAX_SINGLE_ENGINE_FUEL_FLOW * state.powerSetting / 100;
-    const fuelConsumedLastPeriod = (totalEngineFuelFlow * state.simSpeedFactor) / (3600 * SIM_CALCULATION_FREQUENCY);
-    state.fuelFuselage = Math.max(state.fuelFuselage - fuelConsumedLastPeriod, 0);
+    const fuselageFuelConsumedLastPeriod = (totalEngineFuelFlow * state.simSpeedFactor) / (3600 * SIM_CALCULATION_FREQUENCY);
+
+    const fuelAvailableInFuselageSource =
+          state.fuelTankSelector == TANK_SELECTOR_WINGS ? (state.fuelWingLeft + state.fuelWingRight) : 0;
+    const nominalFuelTransferredToFuselage = (state.simSpeedFactor * PROPORTIONER_PUMPS_FUEL_FLOW) / (3600 * SIM_CALCULATION_FREQUENCY);
+    const fuelTransferredToFuselage = state.proportionerPumpsOn ?
+          Math.min(fuelAvailableInFuselageSource, nominalFuelTransferredToFuselage) :
+          0;
+    const netFuselageFlow = fuelTransferredToFuselage - fuselageFuelConsumedLastPeriod;
+    state.fuelFuselage = Math.max(state.fuelFuselage + netFuselageFlow, 0);
+
+    // wing tanks
+    // the proportioner pumps draw equally from each side, but presumably will draw the whole amount from one side if the other is empty
+    const wingFuelTransferredToFuselage = (state.fuelTankSelector == TANK_SELECTOR_WINGS) ? fuelTransferredToFuselage : 0;
+    // left tank
+    const leftWingNominalOutflow = Math.min(state.fuelWingLeft, wingFuelTransferredToFuselage / 2);
+    const rightWingNominalOutflow = Math.min(state.fuelWingRight, wingFuelTransferredToFuselage / 2);
+    const leftWingOutflow = wingFuelTransferredToFuselage - rightWingNominalOutflow;
+    state.fuelWingLeft = Math.max(state.fuelWingLeft - leftWingOutflow, 0)
+    const rightWingOutflow = wingFuelTransferredToFuselage - leftWingNominalOutflow;
+    state.fuelWingRight = Math.max(state.fuelWingRight - rightWingOutflow, 0)
+
   };
 
   const PROPORTIONER_PUMPS_FUEL_ON = 450;
@@ -171,12 +194,15 @@ window.app = function() {
     const hasLeftWingFuel = state.fuelWingLeft > 0;
     const hasRightWingFuel = state.fuelWingRight > 0;
     const hasWingFuel = hasLeftWingFuel || hasRightWingFuel;
-    renderPump('pumpProportioners', state.proportionerPumpsOn, state.proportionerPumpsOn && hasWingFuel);
+    const hasFuel = state.fuelTankSelector == TANK_SELECTOR_WINGS ?
+          hasWingFuel :
+          false;
+    renderPump('pumpProportioners', state.proportionerPumpsOn, state.proportionerPumpsOn && hasFuel);
 
     document.querySelector('path[name="fuelLineWingToFuselageLeft"]').
-      style.setProperty('fill', (state.proportionerPumpsOn && hasLeftWingFuel) ? FUEL_LINE_COLOUR : 'white');
+      style.setProperty('fill', ((state.fuelTankSelector == TANK_SELECTOR_WINGS) && state.proportionerPumpsOn && hasLeftWingFuel) ? FUEL_LINE_COLOUR : 'white');
     document.querySelector('path[name="fuelLineWingToFuselageRight"]').
-      style.setProperty('fill', (state.proportionerPumpsOn && hasRightWingFuel) ? FUEL_LINE_COLOUR : 'white');
+      style.setProperty('fill', ((state.fuelTankSelector == TANK_SELECTOR_WINGS) && state.proportionerPumpsOn && hasRightWingFuel) ? FUEL_LINE_COLOUR : 'white');
   };
 
   const renderWingTanks = () => {
