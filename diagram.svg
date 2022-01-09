@@ -33,26 +33,26 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="1.0830053"
-     inkscape:cx="558.169"
-     inkscape:cy="406.27685"
+     inkscape:zoom="8.3360564"
+     inkscape:cx="893.76794"
+     inkscape:cy="622.35663"
      inkscape:window-width="1916"
      inkscape:window-height="1041"
      inkscape:window-x="0"
      inkscape:window-y="18"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g77711"
      inkscape:snap-midpoints="true"
      units="mm"
-     inkscape:snap-center="false"
-     inkscape:snap-global="false"
+     inkscape:snap-center="true"
+     inkscape:snap-global="true"
      inkscape:snap-bbox="true"
      inkscape:bbox-nodes="false"
      inkscape:object-nodes="true"
      inkscape:bbox-paths="false"
      inkscape:snap-object-midpoints="true"
      inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:snap-nodes="true"
+     inkscape:snap-nodes="false"
      inkscape:snap-bbox-midpoints="true"
      showguides="true"
      inkscape:snap-intersection-paths="true"
@@ -3507,7 +3507,8 @@
       <g
          id="g115870-0-8-8"
          transform="matrix(0.58533324,0,0,0.53968795,374.95841,306.43789)"
-         style="display:inline">
+         style="display:inline"
+         name="switchFuelSelector">
         <text
            xml:space="preserve"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline"
@@ -3547,7 +3548,7 @@
         <g
            id="g76354-2-7-4-4"
            transform="translate(672.15912,-129.93466)"
-           name="switchBatteryOff"
+           name="switchDown"
            style="display:inline">
           <path
              id="rect49653-6-9-9-9"
@@ -3576,7 +3577,7 @@
         <g
            id="g76354-7-9-8-9-1"
            transform="rotate(180,557.3869,625.54093)"
-           name="switchBatteryOn"
+           name="switchUp"
            style="display:inline">
           <path
              id="rect49653-5-6-3-3-9"
@@ -3601,6 +3602,38 @@
              cy="744.06195"
              rx="5.2702904"
              ry="1.3506273" />
+        </g>
+        <g
+           id="g77711"
+           name="switchMiddle">
+          <circle
+             style="opacity:1;fill:#b6b6b6;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.438159;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path72328"
+             cx="893.50037"
+             cy="562.52936"
+             r="15.910142" />
+          <circle
+             style="opacity:1;fill:#e3e3e3;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.292336;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path74267"
+             cx="893.50037"
+             cy="562.52936"
+             r="5.2342162" />
+          <rect
+             style="fill:white;fill-rule:evenodd;stroke-width:2.23082;stroke:none;fill-opacity:1;opacity:0"
+             id="rect79127"
+             width="36.867729"
+             height="39.195995"
+             x="875.06647"
+             y="523.33331"
+             name="switchToggleUp" />
+          <rect
+             style="display:inline;fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.23082;opacity:0"
+             id="rect79127-6"
+             width="36.867729"
+             height="39.195995"
+             x="875.06653"
+             y="562.52936"
+             name="switchToggleDown" />
         </g>
         <text
            xml:space="preserve"

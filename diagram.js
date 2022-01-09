@@ -7,6 +7,8 @@ window.app = function() {
   const MAX_FUSELAGE_FUEL = 514;
   const MAX_WING_FUEL = 645;
   const TANK_SELECTOR_WINGS = Symbol('wings');
+  const TANK_SELECTOR_SEAT = Symbol('seat');
+  const TANK_SELECTOR_PYLONS = Symbol('pylons');
   const PROPORTIONER_PUMPS_FUEL_FLOW = 8000; // lbs / hr
 
   /* Runtime */
@@ -161,6 +163,16 @@ window.app = function() {
     renderAnnunciatorLamp('fuelLow', state.fuelFuselage < 295);
   };
 
+  const SWITCH_3_POS_UP = Symbol('up');
+  const SWITCH_3_POS_MIDDLE = Symbol('middle');
+  const SWITCH_3_POS_DOWN = Symbol('down');
+  const render3PositionSwitch = (cssSelector, position) => {
+    const switchGroup = document.querySelector(cssSelector);
+    switchGroup.querySelector('g[name="switchUp"]').style.setProperty('display', position == SWITCH_3_POS_UP ? 'inline' : 'none');
+    switchGroup.querySelector('g[name="switchMiddle"]').style.setProperty('display', position == SWITCH_3_POS_MIDDLE ? 'inline' : 'none');
+    switchGroup.querySelector('g[name="switchDown"]').style.setProperty('display', position == SWITCH_3_POS_DOWN ? 'inline' : 'none');
+  };
+
   const renderFuelPanel = () => {
     // fuselage/internal gauge
     const GAUGE1_ANGULAR_RATE = 147; // degrees per 1000 lbs of fuel
@@ -188,6 +200,13 @@ window.app = function() {
     indicatorStyle.setProperty('transform', `rotate(${ state.fuelWingRight * GAUGE2_ANGULAR_RATE / 100 }deg)`);
     indicatorStyle.setProperty('transform-box', 'fill-box');
     indicatorStyle.setProperty('transform-origin', 'center');
+
+    render3PositionSwitch(
+      'g[name="fuelPanel"] g[name="switchFuelSelector"]',
+      state.fuelTankSelector == TANK_SELECTOR_SEAT ? SWITCH_3_POS_UP :
+        state.fuelTankSelector == TANK_SELECTOR_WINGS ? SWITCH_3_POS_MIDDLE :
+        SWITCH_3_POS_DOWN
+    );
   };
 
   const renderProportionerLines = () => {
@@ -266,6 +285,14 @@ window.app = function() {
     document.querySelector(`g[name="${tankName}"] input[type="text"]`).onblur = handleFuelIndicatorChange(tankName, setFuel, maxFuel);
   };
 
+  const add3PositionSwitchEventHandlers = (cssSelector, positionCallback) => {
+    const switchGroup = document.querySelector(cssSelector);
+    switchGroup.querySelector('g[name="switchUp"]').onclick = () => positionCallback(SWITCH_3_POS_MIDDLE);
+    switchGroup.querySelector('g[name="switchMiddle"] rect[name="switchToggleUp"]').onclick = () => positionCallback(SWITCH_3_POS_UP);
+    switchGroup.querySelector('g[name="switchMiddle"] rect[name="switchToggleDown"]').onclick = () => positionCallback(SWITCH_3_POS_DOWN);
+    switchGroup.querySelector('g[name="switchDown"]').onclick = () => positionCallback(SWITCH_3_POS_MIDDLE);
+  };
+
   const addEventHandlers = () => {
     document.getElementById('throttle').oninput = throttleChangedHandler;
     document.querySelector('g[name="switchBatteryOn"]').onclick = () => { state.batteryMasterOn = false; };
@@ -276,6 +303,13 @@ window.app = function() {
     document.querySelector('g[name="buttonSimSpeedSlower"]').onclick = () => { state.simSpeedFactor = Math.max(state.simSpeedFactor / 2, 1); };
     addFuelIndicatorEventHandlers('indicatorFuelWingLeft', () => state.fuelWingLeft, (fuel) => { state.fuelWingLeft = fuel; }, MAX_WING_FUEL);
     addFuelIndicatorEventHandlers('indicatorFuelWingRight', () => state.fuelWingRight, (fuel) => { state.fuelWingRight = fuel; }, MAX_WING_FUEL);
+    add3PositionSwitchEventHandlers('g[name="fuelPanel"] g[name="switchFuelSelector"]', (newPos) => {
+      switch (newPos) {
+      case SWITCH_3_POS_UP: state.fuelTankSelector = TANK_SELECTOR_SEAT; break;
+      case SWITCH_3_POS_MIDDLE: state.fuelTankSelector = TANK_SELECTOR_WINGS; break;
+      case SWITCH_3_POS_DOWN: state.fuelTankSelector = TANK_SELECTOR_PYLONS; break;
+      };
+    });
   };
 
   const initSimulation = () => {
