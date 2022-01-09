@@ -6,6 +6,7 @@ window.app = function() {
   const FUEL_LINE_COLOUR = '#36d4dc';
   const MAX_FUSELAGE_FUEL = 514;
   const MAX_WING_FUEL = 645;
+  const MAX_SEAT_FUEL = 195;
   const TANK_SELECTOR_WINGS = Symbol('wings');
   const TANK_SELECTOR_SEAT = Symbol('seat');
   const TANK_SELECTOR_PYLONS = Symbol('pylons');
@@ -20,6 +21,7 @@ window.app = function() {
     fuelFuselage: MAX_FUSELAGE_FUEL,
     fuelWingLeft: MAX_WING_FUEL,
     fuelWingRight: MAX_WING_FUEL,
+    fuelSeat: 0, // don't think the seat tank was common, so leaving it empty seems a good default
     proportionerPumpsOn: false,
     fuelTankSelector: TANK_SELECTOR_WINGS,
   };
@@ -230,6 +232,10 @@ window.app = function() {
     renderFuelTankIndicator('indicatorFuelWingRight', state.fuelWingRight, MAX_WING_FUEL);
   };
 
+  const renderSeatTank = () => {
+    renderFuelTankIndicator('indicatorFuelSeat', state.fuelSeat, MAX_SEAT_FUEL);
+  };
+
   const renderUI = () => {
     renderBatteryMasterSwitch();
     renderEngines();
@@ -239,6 +245,7 @@ window.app = function() {
     renderFuelPanel();
     renderProportionerLines();
     renderWingTanks();
+    renderSeatTank();
   };
 
   const runSimulation = () => {
@@ -311,6 +318,7 @@ window.app = function() {
       case SWITCH_3_POS_DOWN: state.fuelTankSelector = TANK_SELECTOR_PYLONS; break;
       };
     });
+    addFuelIndicatorEventHandlers('indicatorFuelSeat', () => state.fuelSeat, (fuel) => { state.fuelSeat = fuel; }, MAX_SEAT_FUEL);
   };
 
   const initSimulation = () => {
