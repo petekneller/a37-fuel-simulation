@@ -34,6 +34,8 @@ window.app = function() {
     fuelTankSelector: TANK_SELECTOR_WINGS,
     tipTankSelectorLeft: TIP_SELECTOR_OFF,
     tipTankSelectorRight: TIP_SELECTOR_OFF,
+    tipTankDumpOnLeft: false,
+    tipTankDumpOnRight: false,
   };
 
   const throttlePosition = () =>
@@ -50,8 +52,16 @@ window.app = function() {
 
   const MAX_SINGLE_ENGINE_FUEL_FLOW = 3200; // lbs / hr
   const TRANSFER_PUMPS_FUEL_FLOW = 8000; // lbs / hr
+  const TIP_DUMP_FUEL_FLOW = 15000;
 
   const updateFuelLevels = () => {
+    // tip tank dumping
+    const nominalAmountDumped = (TIP_DUMP_FUEL_FLOW * state.simSpeedFactor) / (3600 * SIM_CALCULATION_FREQUENCY);
+    if (engineIsRunning() && state.tipTankDumpOnLeft)
+      state.fuelTipLeft = Math.max(state.fuelTipLeft - nominalAmountDumped, 0);
+    if (engineIsRunning() && state.tipTankDumpOnRight)
+      state.fuelTipRight = Math.max(state.fuelTipRight - nominalAmountDumped, 0);
+
     // fuselage tank
     const totalEngineFuelFlow = 2 * MAX_SINGLE_ENGINE_FUEL_FLOW * state.powerSetting / 100;
     const fuselageFuelConsumedLastPeriod = (totalEngineFuelFlow * state.simSpeedFactor) / (3600 * SIM_CALCULATION_FREQUENCY);
@@ -170,6 +180,18 @@ window.app = function() {
       (state.fuelTankSelector != TANK_SELECTOR_SEAT) &&
       (state.fuelFuselage < TRANSFER_PUMPS_FUEL_ON ||
        (state.fuelFuselage < TRANSFER_PUMPS_FUEL_OFF && state.proportionerPumpsOn));
+
+    if (engineIsRunning() && state.tipTankSelectorLeft == TIP_SELECTOR_DUMP)
+      state.tipTankDumpOnLeft = true;
+
+    if (engineIsRunning() && state.tipTankDumpOnLeft && state.tipTankSelectorLeft == TIP_SELECTOR_ON)
+      state.tipTankDumpOnLeft = false;
+
+    if (engineIsRunning() && state.tipTankSelectorRight == TIP_SELECTOR_DUMP)
+      state.tipTankDumpOnRight = true;
+
+    if (engineIsRunning() && state.tipTankDumpOnRight && state.tipTankSelectorRight == TIP_SELECTOR_ON)
+      state.tipTankDumpOnRight = false;
   };
 
   const FUEL_LINE_COLOUR = '#36d4dc';
@@ -381,12 +403,26 @@ window.app = function() {
     renderFuelLine('rect[name="fuelLineTipToWingLeft"]', leftPumpHasPressure);
     renderVentLine('rect[name="fuelLineTipToWingVentLeft"]', leftPumpHasPressure && (state.fuelWingLeft >= MAX_WING_FUEL));
 
+    const leftDumpValve = document.querySelector('g[name="tipTankDumpValveLeft"]');
+    const leftValveStyle = leftDumpValve.querySelector('rect[name="valve"]').style;
+    leftValveStyle.setProperty('transform-box', 'fill-box');
+    leftValveStyle.setProperty('transform-origin', 'center');
+    leftValveStyle.setProperty('transform', `rotate(${ state.tipTankDumpOnLeft ? 90 : 0 }deg)`);
+    leftDumpValve.querySelector('path[name="background"]').style.setProperty('fill', engineIsRunning() && state.tipTankDumpOnLeft && (state.fuelTipLeft > 0) ? FUEL_LINE_COLOUR : 'white');
+
     // right
     renderFuelTankIndicator('indicatorFuelTipRight', state.fuelTipRight, MAX_TIP_FUEL);
     const rightPumpHasPressure = rightTipTransferPumpIsOn() && (state.fuelTipRight > 0);
     renderPump('pumpTipRight', rightTipTransferPumpIsOn(), rightPumpHasPressure);
     renderFuelLine('rect[name="fuelLineTipToWingRight"]', rightPumpHasPressure);
     renderVentLine('rect[name="fuelLineTipToWingVentRight"]', rightPumpHasPressure && (state.fuelWingRight >= MAX_WING_FUEL));
+
+    const rightDumpValve = document.querySelector('g[name="tipTankDumpValveRight"]');
+    const rightValveStyle = rightDumpValve.querySelector('rect[name="valve"]').style;
+    rightValveStyle.setProperty('transform-box', 'fill-box');
+    rightValveStyle.setProperty('transform-origin', 'center');
+    rightValveStyle.setProperty('transform', `rotate(${ state.tipTankDumpOnRight ? 90 : 0 }deg)`);
+    rightDumpValve.querySelector('path[name="background"]').style.setProperty('fill', engineIsRunning() && state.tipTankDumpOnRight && (state.fuelTipRight > 0) ? FUEL_LINE_COLOUR : 'white');
   };
 
   const renderUI = () => {

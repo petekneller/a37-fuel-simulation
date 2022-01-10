@@ -33,20 +33,20 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="3.6208309"
-     inkscape:cx="838.34349"
-     inkscape:cy="535.78862"
-     inkscape:window-width="2556"
-     inkscape:window-height="1401"
-     inkscape:window-x="3200"
+     inkscape:zoom="2.5889965"
+     inkscape:cx="941.09822"
+     inkscape:cy="307.45503"
+     inkscape:window-width="1916"
+     inkscape:window-height="1041"
+     inkscape:window-x="0"
      inkscape:window-y="18"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g115870-0"
+     inkscape:current-layer="layer1"
      inkscape:snap-midpoints="true"
      units="mm"
      inkscape:snap-center="false"
      inkscape:snap-global="true"
-     inkscape:snap-bbox="false"
+     inkscape:snap-bbox="true"
      inkscape:bbox-nodes="false"
      inkscape:object-nodes="true"
      inkscape:bbox-paths="false"
@@ -5351,6 +5351,46 @@
              r="1.8" />
         </g>
       </g>
+    </g>
+    <g
+       id="g2104-9"
+       transform="matrix(0.70731807,0,0,0.70731807,1373.4045,157.00849)"
+       style="display:inline"
+       name="tipTankDumpValveRight">
+      <path
+         id="rect1647-2"
+         style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 84.816406,357.76562 a 6.5499753,6.5499755 0 0 0 -6.550781,6.54883 6.5499753,6.5499755 0 0 0 2.953125,5.46875 v 23.16407 h 7.193359 v -23.16211 a 6.5499753,6.5499755 0 0 0 2.953125,-5.47071 6.5499753,6.5499755 0 0 0 -6.548828,-6.54883 z"
+         transform="matrix(1.7084285,0,0,1.8529226,-707.23453,-394.2224)"
+         name="background" />
+      <rect
+         style="fill:black;fill-opacity:1;fill-rule:evenodd;stroke-width:1.77921;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect1885-0"
+         width="20.029749"
+         height="5.2839923"
+         x="-572.34772"
+         y="278.18338"
+         name="valve" />
+    </g>
+    <g
+       id="g2104-9-9"
+       transform="matrix(0.70731807,0,0,0.70731807,546.37687,157.00864)"
+       style="display:inline"
+       name="tipTankDumpValveLeft">
+      <path
+         id="rect1647-2-2"
+         style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 84.816406,357.76562 a 6.5499753,6.5499755 0 0 0 -6.550781,6.54883 6.5499753,6.5499755 0 0 0 2.953125,5.46875 v 23.16407 h 7.193359 v -23.16211 a 6.5499753,6.5499755 0 0 0 2.953125,-5.47071 6.5499753,6.5499755 0 0 0 -6.548828,-6.54883 z"
+         transform="matrix(1.7084285,0,0,1.8529226,-707.23453,-394.2224)"
+         name="background" />
+      <rect
+         style="fill:black;fill-opacity:1;fill-rule:evenodd;stroke-width:1.77921;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect1885-0-2"
+         width="20.029749"
+         height="5.2839923"
+         x="-572.34772"
+         y="278.18338"
+         name="valve" />
     </g>
   </g>
 </svg>
