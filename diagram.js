@@ -508,7 +508,7 @@ window.app = function() {
   const fuelGaugeEndTest = (gauge) => {
     const animation = gauge.querySelector('animateTransform');
     animation.setAttribute('from', '0');
-    animation.setAttribute('dur', '0.25s');
+    animation.setAttribute('dur', `${ 1000 / SIM_CALCULATION_FREQUENCY }ms`);
   };
 
   const addEventHandlers = () => {
