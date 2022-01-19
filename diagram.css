@@ -10,12 +10,12 @@ input[type=range] {
   transform-origin: 75px 75px;
   transform: rotate(-90deg);
 
-  -webkit-appearance: none;
-  background: transparent;
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  background: transparent; /* Otherwise white in Chrome */
 }
 
 input[type=range]:focus {
-  outline: none;
+  outline: none; /* Removes the blue border */
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -23,14 +23,42 @@ input[type=range]::-webkit-slider-thumb {
 
   height: 30px;
   width: 76px;
-  /* border: 1px solid #000000; */
   border-radius: 3px;
   background: transparent;
   cursor: grab;
   /* margin-top: -104px; */
-  /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
   background-image: url('throttle.svg');
   transform: rotate(90deg)
+}
+
+input[type=range]::-moz-range-thumb {
+  height: 30px;
+  width: 76px;
+  border-radius: 3px;
+  background: transparent;
+  cursor: grab;
+  background-image: url('throttle.svg');
+  transform: rotate(90deg)
+}
+
+input[type=range]::-ms-thumb {
+  height: 30px;
+  width: 76px;
+  border-radius: 3px;
+  background: transparent
+  cursor: grab;
+  background-image: url('throttle.svg');
+  transform: rotate(90deg)
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
 }
 
 .manipulatible {
