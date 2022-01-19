@@ -206,8 +206,6 @@ window.app = function() {
 
   const renderPump = (pumpName, isOn, hasPressure) => {
     document.querySelectorAll(`g[name="${pumpName}"] g[name="impeller"]`).forEach(impeller => {
-      impeller.style.setProperty('transform-box', 'fill-box');
-      impeller.style.setProperty('transform-origin', 'center');
       impeller.
         querySelector('animateTransform').
         setAttribute('to', isOn ? '60' : '0');
@@ -250,8 +248,6 @@ window.app = function() {
     document.
       querySelectorAll('g[name="gaugeFuelFlow"] path[name="indicator"]').
       forEach(indicator => {
-        indicator.style.setProperty('transform-box', 'fill-box');
-        indicator.style.setProperty('transform-origin', 'center');
         indicator.style.setProperty('transform', `rotate(${ INDICATOR_ANGULAR_RATE * singleEngineFuelFlow / 1000 }deg)`);
       });
   };
@@ -267,8 +263,6 @@ window.app = function() {
 
     const barStyle = indicator.querySelector('rect[name="barGauge"]').style;
     barStyle.setProperty('transform', `scaleY(${ currentFuel / maxFuel })`);
-    barStyle.setProperty('transform-box', 'fill-box');
-    barStyle.setProperty('transform-origin', 'bottom');
   };
 
   const renderFuselageTank = () => {
@@ -305,8 +299,6 @@ window.app = function() {
 
   const renderFuelGauge = (indicatorElement, indicatorRotation) => {
     let indicatorStyle = indicatorElement.style;
-    indicatorStyle.setProperty('transform-box', 'fill-box');
-    indicatorStyle.setProperty('transform-origin', 'center');
 
     let indicatorTransform = indicatorElement.querySelector('animateTransform');
     if (!state.fuelTestButtonDepressed) {
@@ -366,8 +358,6 @@ window.app = function() {
     );
 
     const fuelTestGaugeStyle = document.querySelector('g[name="buttonFuelTest"]').style;
-    fuelTestGaugeStyle.setProperty('transform-box', 'fill-box');
-    fuelTestGaugeStyle.setProperty('transform-origin', 'center');
     fuelTestGaugeStyle.setProperty('transform', `scale(${ state.fuelTestButtonDepressed ? '0.7' : '1.0' })`);
   };
 
@@ -424,8 +414,6 @@ window.app = function() {
 
     const leftDumpValve = document.querySelector('g[name="tipTankDumpValveLeft"]');
     const leftValveStyle = leftDumpValve.querySelector('rect[name="valve"]').style;
-    leftValveStyle.setProperty('transform-box', 'fill-box');
-    leftValveStyle.setProperty('transform-origin', 'center');
     leftValveStyle.setProperty('transform', `rotate(${ state.tipTankDumpOnLeft ? 90 : 0 }deg)`);
     leftDumpValve.querySelector('path[name="background"]').style.setProperty('fill', engineIsRunning() && state.tipTankDumpOnLeft && (state.fuelTipLeft > 0) ? FUEL_LINE_COLOUR : 'white');
 
@@ -438,8 +426,6 @@ window.app = function() {
 
     const rightDumpValve = document.querySelector('g[name="tipTankDumpValveRight"]');
     const rightValveStyle = rightDumpValve.querySelector('rect[name="valve"]').style;
-    rightValveStyle.setProperty('transform-box', 'fill-box');
-    rightValveStyle.setProperty('transform-origin', 'center');
     rightValveStyle.setProperty('transform', `rotate(${ state.tipTankDumpOnRight ? 90 : 0 }deg)`);
     rightDumpValve.querySelector('path[name="background"]').style.setProperty('fill', engineIsRunning() && state.tipTankDumpOnRight && (state.fuelTipRight > 0) ? FUEL_LINE_COLOUR : 'white');
   };
