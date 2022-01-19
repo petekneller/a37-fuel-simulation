@@ -453,9 +453,6 @@ window.app = function() {
 
   /* Event handlers */
 
-  const throttleChangedHandler = () => {
-  };
-
   const prepareFuelIndicatorChange = (tankName, getFuel) => () => {
     const indicatorGroup = document.querySelector(`g[name="${tankName}"]`);
     const input =  indicatorGroup.querySelector('input[type="text"]');
@@ -479,10 +476,6 @@ window.app = function() {
       querySelector('text').
       style.setProperty('display', 'inline');
   };
-
-  /* end event handlers */
-
-  /* Initialisation */
 
   const addFuelIndicatorEventHandlers = (tankName, getFuel, setFuel, maxFuel) => {
     document.querySelector(`g[name="${tankName}"] text`).onclick = prepareFuelIndicatorChange(tankName, getFuel);
@@ -512,7 +505,6 @@ window.app = function() {
   };
 
   const addEventHandlers = () => {
-    document.getElementById('throttle').oninput = throttleChangedHandler;
     document.querySelector('g[name="switchBatteryOn"]').onclick = () => { state.batteryMasterOn = false; };
     document.querySelector('g[name="switchBatteryOff"]').onclick = () => { state.batteryMasterOn = true; };
     addFuelIndicatorEventHandlers('indicatorFuelFuselage', () => state.fuelFuselage, (fuel) => { state.fuelFuselage = fuel; }, MAX_FUSELAGE_FUEL);
@@ -567,17 +559,12 @@ window.app = function() {
     };
   };
 
-  const initSimulation = () => {
-  };
+  /* end event handlers */
 
-  const initUI = () => {
-  };
+  /* Initialisation */
 
   const init = () => {
-    console.log('initing');
     addEventHandlers();
-    initSimulation();
-    initUI();
     window.setInterval(runSimulation, 1000 / SIM_CALCULATION_FREQUENCY);
   };
 
