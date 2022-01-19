@@ -36,6 +36,7 @@ window.app = function() {
     tipTankSelectorRight: TIP_SELECTOR_OFF,
     tipTankDumpOnLeft: false,
     tipTankDumpOnRight: false,
+    fuelTestButtonDepressed: false,
   };
 
   const throttlePosition = () =>
@@ -302,33 +303,46 @@ window.app = function() {
     switchGroup.querySelector('g[name="switchDown"]').style.setProperty('display', position == SWITCH_3_POS_DOWN ? 'inline' : 'none');
   };
 
+  const renderFuelGauge = (indicatorElement, indicatorRotation) => {
+    let indicatorStyle = indicatorElement.style;
+    indicatorStyle.setProperty('transform-box', 'fill-box');
+    indicatorStyle.setProperty('transform-origin', 'center');
+
+    let indicatorTransform = indicatorElement.querySelector('animateTransform');
+    if (!state.fuelTestButtonDepressed) {
+      indicatorTransform.setAttribute('from', indicatorTransform.getAttribute('to'));
+      indicatorTransform.setAttribute('to', new String(indicatorRotation));
+      indicatorTransform.beginElement();
+    }
+  };
+
   const renderFuelPanel = () => {
     // fuselage/internal gauge
     const GAUGE1_ANGULAR_RATE = 147; // degrees per 1000 lbs of fuel
 
-    let indicatorStyle = document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel1"] path[name="indicatorFuselage"]').style;
-    indicatorStyle.setProperty('transform', `rotate(${ state.fuelFuselage * GAUGE1_ANGULAR_RATE / 1000 }deg)`);
-    indicatorStyle.setProperty('transform-box', 'fill-box');
-    indicatorStyle.setProperty('transform-origin', 'center');
+    renderFuelGauge(
+      document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel1"] path[name="indicatorFuselage"]'),
+      state.fuelFuselage * GAUGE1_ANGULAR_RATE / 1000)
+    ;
 
-    indicatorStyle = document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel1"] path[name="indicatorInternal"]').style;
     const totalFuel = state.fuelFuselage + state.fuelWingLeft + state.fuelWingRight;
-    indicatorStyle.setProperty('transform', `rotate(${ totalFuel * GAUGE1_ANGULAR_RATE / 1000 }deg)`);
-    indicatorStyle.setProperty('transform-box', 'fill-box');
-    indicatorStyle.setProperty('transform-origin', 'center');
+    renderFuelGauge(
+      document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel1"] path[name="indicatorInternal"]'),
+      totalFuel * GAUGE1_ANGULAR_RATE / 1000)
+    ;
 
     // wings gauge
     const GAUGE2_ANGULAR_RATE = 38.75; // degrees per 100 lbs of fuel
 
-    indicatorStyle = document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel2"] path[name="indicatorWingLeft"]').style;
-    indicatorStyle.setProperty('transform', `rotate(${ state.fuelWingLeft * GAUGE2_ANGULAR_RATE / 100 }deg)`);
-    indicatorStyle.setProperty('transform-box', 'fill-box');
-    indicatorStyle.setProperty('transform-origin', 'center');
+    renderFuelGauge(
+      document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel2"] path[name="indicatorWingLeft"]'),
+      state.fuelWingLeft * GAUGE2_ANGULAR_RATE / 100)
+    ;
 
-    indicatorStyle = document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel2"] path[name="indicatorWingRight"]').style;
-    indicatorStyle.setProperty('transform', `rotate(${ state.fuelWingRight * GAUGE2_ANGULAR_RATE / 100 }deg)`);
-    indicatorStyle.setProperty('transform-box', 'fill-box');
-    indicatorStyle.setProperty('transform-origin', 'center');
+    renderFuelGauge(
+      document.querySelector('g[name="fuelPanel"] g[name="gaugeFuel2"] path[name="indicatorWingRight"]'),
+      state.fuelWingRight * GAUGE2_ANGULAR_RATE / 100)
+    ;
 
     render3PositionSwitch(
       'g[name="fuelPanel"] g[name="switchFuelSelector"]',
@@ -350,6 +364,11 @@ window.app = function() {
         state.tipTankSelectorRight == TIP_SELECTOR_OFF ? SWITCH_3_POS_MIDDLE :
         SWITCH_3_POS_DOWN
     );
+
+    const fuelTestGaugeStyle = document.querySelector('g[name="buttonFuelTest"]').style;
+    fuelTestGaugeStyle.setProperty('transform-box', 'fill-box');
+    fuelTestGaugeStyle.setProperty('transform-origin', 'center');
+    fuelTestGaugeStyle.setProperty('transform', `scale(${ state.fuelTestButtonDepressed ? '0.7' : '1.0' })`);
   };
 
   const renderProportionerLines = () => {
@@ -492,6 +511,20 @@ window.app = function() {
     switchGroup.querySelector('g[name="switchDown"]').onclick = () => positionCallback(SWITCH_3_POS_MIDDLE);
   };
 
+  const fuelGaugeBeginTest = (gauge) => {
+    const animation = gauge.querySelector('animateTransform');
+    animation.setAttribute('from', animation.getAttribute('to'));
+    animation.setAttribute('to', '0');
+    animation.setAttribute('dur', '1s');
+    animation.beginElement();
+  };
+
+  const fuelGaugeEndTest = (gauge) => {
+    const animation = gauge.querySelector('animateTransform');
+    animation.setAttribute('from', '0');
+    animation.setAttribute('dur', '0.25s');
+  };
+
   const addEventHandlers = () => {
     document.getElementById('throttle').oninput = throttleChangedHandler;
     document.querySelector('g[name="switchBatteryOn"]').onclick = () => { state.batteryMasterOn = false; };
@@ -530,6 +563,22 @@ window.app = function() {
       case SWITCH_3_POS_DOWN: state.tipTankSelectorRight = TIP_SELECTOR_DUMP; break;
       };
     });
+
+    // fuel test button
+    document.querySelector('g[name="fuelPanel"] g[name="buttonFuelTest"]').onclick = () => {
+      state.fuelTestButtonDepressed = true;
+      fuelGaugeBeginTest(document.querySelector('g[name="fuelPanel"] path[name="indicatorFuselage"]'));
+      fuelGaugeBeginTest(document.querySelector('g[name="fuelPanel"] path[name="indicatorInternal"]'));
+      fuelGaugeBeginTest(document.querySelector('g[name="fuelPanel"] path[name="indicatorWingLeft"]'));
+      fuelGaugeBeginTest(document.querySelector('g[name="fuelPanel"] path[name="indicatorWingRight"]'));
+      window.setTimeout(() => {
+        state.fuelTestButtonDepressed = false;
+        fuelGaugeEndTest(document.querySelector('g[name="fuelPanel"] path[name="indicatorFuselage"]'));
+        fuelGaugeEndTest(document.querySelector('g[name="fuelPanel"] path[name="indicatorInternal"]'));
+        fuelGaugeEndTest(document.querySelector('g[name="fuelPanel"] path[name="indicatorWingLeft"]'));
+        fuelGaugeEndTest(document.querySelector('g[name="fuelPanel"] path[name="indicatorWingRight"]'));
+      }, 3000);
+    };
   };
 
   const initSimulation = () => {
