@@ -271,7 +271,7 @@ window.app = function() {
   };
 
   const renderSimulationControls = () => {
-    document.querySelector('text[name="simSpeed"]').textContent = `x ${state.simSpeedFactor}`;
+    document.querySelector('text[name="simSpeed"]').textContent = `${state.simSpeedFactor} x`;
   };
 
   const renderAnnunciatorLamp = (lampName, isOn) => {
